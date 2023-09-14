@@ -55,7 +55,7 @@ const ButtonCSS = css`
   border-radius: 4px;
   cursor: pointer;
 
-  &:hover {
+  :hover {
     background-color: #0056b3;
   }
 `;
