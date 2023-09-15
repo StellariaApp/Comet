@@ -20,7 +20,7 @@ export const Compiler = (source: string) => {
 
 const hashClassName = (cssContent: string) => {
   const hash = hashString(cssContent);
-  const className = `comet-${hash}`;
+  const className = `comet_${hash}`;
 
   if (StylesSheet.has(className)) return className;
 
