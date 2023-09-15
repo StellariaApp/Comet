@@ -1,6 +1,6 @@
 const StylesSheet = new Map();
 
-const Compiler = (source: string) => {
+export const Compiler = (source: string) => {
   const regex = /const (\w+) = css`([\s\S]+?)`;/g;
   const match = regex.exec(source);
   if (!match) return source;
@@ -42,4 +42,4 @@ const hashString = (str: string) => {
   return hash.toString(36);
 };
 
-module.exports = Compiler;
+export default Compiler;
