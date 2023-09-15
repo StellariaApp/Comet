@@ -1,0 +1,26 @@
+{
+  "name": "@stellaria/comet-web-vite",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc && vite build",
+    "start": "vite preview",
+    "dev": "vite",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx .",
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
+  },
+  "dependencies": {
+    "preact": "^10.16.0"
+  },
+  "devDependencies": {
+    "@preact/preset-vite": "^2.5.0",
+    "@stellaria/comet": "*",
+    "@stellaria/comet-next": "*",
+    "@stellaria/comet-compiler": "*",
+    "typescript-config-stellaria-comet": "*",
+    "eslint-config-stellaria-comet": "*",
+    "typescript": "^5.0.2",
+    "vite": "^4.4.5"
+  }
+}
