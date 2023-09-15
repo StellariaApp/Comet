@@ -1,24 +1,38 @@
-const StylesSheet = new Map();
+import { existsSync, mkdirSync, writeFileSync } from "fs";
+const StylesSheet = new Map<string, string>();
 
 export const Compiler = (source: string) => {
   const regex = /const (\w+) = css`([\s\S]+?)`;/g;
-  const match = regex.exec(source);
-  if (!match) return source;
 
-  const variableName = match[1];
-  const cssContent = match[2];
+  const newSource = source.replace(regex, (match, variableName, cssContent) => {
+    const className = hashClassName(cssContent);
+    return `const ${variableName} = "${className}";`;
+  });
 
-  const className = hashClassName(cssContent);
-
-  const newSource = source.replace(
-    match[0],
-    `const ${variableName} = "${className}";`
-  );
-
-  console.log(StylesSheet.values());
+  const styleSheet = minify(styleSheetGenerator(StylesSheet));
+  cssFile(styleSheet);
 
   return newSource;
 };
+
+const cssFile = (css: string) => {
+  const dirPath = `./dist`;
+  const filePath = `./dist/comet.css`;
+  const fileContent = css;
+
+  if (!existsSync(dirPath)) mkdirSync(dirPath);
+
+  writeFileSync(filePath, fileContent);
+};
+
+const styleSheetGenerator = (styles: Map<string, string>) =>
+  Array.from(styles).reduce(
+    (styleSheet, [className, cssContent]) =>
+      `${styleSheet}.${className} { ${cssContent} }`,
+    ""
+  );
+
+const minify = (cssContent: string) => cssContent.replace(/\s/g, "");
 
 const hashClassName = (cssContent: string) => {
   const hash = hashString(cssContent);
@@ -31,17 +45,13 @@ const hashClassName = (cssContent: string) => {
   return className;
 };
 
-const hashString = (str: string) => {
-  let hash = 0;
-  if (str.length === 0) return hash;
-
-  for (let i = 0; i < str.length; i++) {
-    const char = str.charCodeAt(i);
-    hash = (hash << 5) - hash + char;
-    hash |= 0;
-  }
-
-  return hash.toString(36);
-};
+const hashString = (str: string) =>
+  str
+    .split("")
+    .reduce((hash, char) => {
+      const charCode = char.charCodeAt(0);
+      return (hash << 5) - hash + charCode;
+    }, 0)
+    .toString(36);
 
 export default Compiler;

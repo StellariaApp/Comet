@@ -1,4 +1,4 @@
-import { Compiler } from "../../comet-compiler";
+import { Compiler } from "@stellaria/comet-compiler";
 
 type Opts = {
   fileRegex?: RegExp;
