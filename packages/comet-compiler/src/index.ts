@@ -1,7 +1,18 @@
 import { existsSync, mkdirSync, writeFileSync } from "fs";
 const StylesSheet = new Map<string, string>();
 
-export const Compiler = (source: string) => {
+type ICompilerOptions = {
+  path: string;
+  filename?: string;
+};
+
+const defaultOptions: ICompilerOptions = {
+  path: "./public/comet",
+  filename: "main.css",
+};
+
+export const Compiler = (source: string, options?: ICompilerOptions) => {
+  const opts = { ...defaultOptions, ...options };
   const regex = /const (\w+) = css`([\s\S]+?)`;/g;
 
   const newSource = source.replace(regex, (match, variableName, cssContent) => {
@@ -9,20 +20,24 @@ export const Compiler = (source: string) => {
     return `const ${variableName} = "${className}";`;
   });
 
-  const styleSheet = minify(styleSheetGenerator(StylesSheet));
-  cssFile(styleSheet);
+  const styleSheet = styleSheetGenerator(StylesSheet);
+  cssCreateFile(styleSheet, opts);
 
   return newSource;
 };
 
-const cssFile = (css: string) => {
-  const dirPath = `./dist`;
-  const filePath = `./dist/comet.css`;
+const cssCreateFile = (css: string, options: ICompilerOptions) => {
+  const dirPath = options?.path;
+  const filePath = `${dirPath}/${options?.filename}`;
   const fileContent = css;
 
-  if (!existsSync(dirPath)) mkdirSync(dirPath);
-
-  writeFileSync(filePath, fileContent);
+  try {
+    existsSync(dirPath);
+    writeFileSync(filePath, fileContent);
+  } catch (error) {
+    mkdirSync(dirPath, { recursive: true });
+    writeFileSync(filePath, fileContent);
+  }
 };
 
 const styleSheetGenerator = (styles: Map<string, string>) =>

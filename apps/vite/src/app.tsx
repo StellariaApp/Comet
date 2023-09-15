@@ -5,6 +5,11 @@ import "./app.css";
 import { css } from "@stellaria/comet";
 
 const styles = css`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  width: 200px;
   background-color: red;
   color: white;
 `;
