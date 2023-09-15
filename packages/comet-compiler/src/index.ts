@@ -15,6 +15,8 @@ export const Compiler = (source: string) => {
     `const ${variableName} = "${className}";`
   );
 
+  console.log(StylesSheet.values());
+
   return newSource;
 };
 
