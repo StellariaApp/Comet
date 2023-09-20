@@ -17,11 +17,25 @@ const styles = css`
 const styles2 = css`
   background-color: blue;
   color: white;
+  width: 200px;
+  height: 100px;
+  border-radius: 10px;
+  border: 1px solid black;
+  margin: 10px;
+  padding: 10px;
+  box-sizing: border-box;
+  &:hover {
+    background-color: yellow;
+  }
 `;
 
 const styles3 = css`
   background-color: green;
   color: white;
+
+  &:hover {
+    background-color: yellow;
+  }
 `;
 
 export function App() {
