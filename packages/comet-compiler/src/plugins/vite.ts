@@ -58,8 +58,6 @@ export const Comet = (): Vite.Plugin => {
         fileId,
         themes: config.themes,
       });
-
-      console.log("Transform", filename, fileId);
     },
   };
 };

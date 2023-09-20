@@ -6,7 +6,13 @@ export type TransformOptions = {
   themes?: Themes;
 };
 
+export type TransformOutput = {
+  code: string;
+  map: string;
+  css: string;
+};
+
 export type TransformFn = (
   source: string,
   options?: TransformOptions
-) => string;
+) => TransformOutput;
