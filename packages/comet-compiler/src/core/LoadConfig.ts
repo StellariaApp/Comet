@@ -26,7 +26,7 @@ export const LoadConfig: LoadConfigFn = async (root) => {
       const result = await esbuild.build({
         absWorkingDir: root,
         entryPoints: [filename],
-        outfile: "excss.js",
+        outfile: "comet.js",
         write: false,
         bundle: true,
         format: isESM ? "esm" : "cjs",

@@ -1,0 +1,26 @@
+[package]
+name = "comet_compiler"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+itertools = { workspace = true }
+scoped-tls = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+getrandom = { workspace = true, features = ["js"] }
+grass = { workspace = true }
+grass_compiler = { workspace = true }
+swc_core = { workspace = true, features = [
+  "ecma_transforms_typescript",
+  "ecma_transforms_react",
+  "ecma_ast",
+  "ecma_visit",
+  "ecma_parser",
+  "ecma_codegen",
+  "common",
+  "common_sourcemap"
+] }
+murmur3 = { workspace = true }
