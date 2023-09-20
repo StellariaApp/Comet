@@ -34,7 +34,7 @@ async function main() {
       "wasm-pack build",
       "--target=web",
       "--no-pack",
-      "--out-dir=../../dist/wasm-web",
+      "--out-dir=../../dist/web",
       "--out-name=comet_compiler",
       "./modules/compiler_wasm",
     ].join(" ")
@@ -46,7 +46,7 @@ async function main() {
   );
 
   await fs.writeFile(
-    "dist/wasm-web/package.json",
+    "dist/web/package.json",
     JSON.stringify({ type: "module" })
   );
 

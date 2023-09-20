@@ -1,5 +1,7 @@
 import type * as Vite from "vite";
 
+import { transform } from "@stellaria/comet-compiler-rust";
+
 import { ResolvedConfig } from "../types/LoadConfig";
 import { LoadConfig } from "../core/LoadConfig";
 import {
@@ -8,7 +10,6 @@ import {
   VIRTUAL_MODULE_ID,
 } from "../constants";
 import { CreateFileId } from "../core/CreateFile";
-import { Transform } from "../core/Transform";
 
 export const Comet = (): Vite.Plugin => {
   let config = {} as ResolvedConfig;
@@ -53,11 +54,26 @@ export const Comet = (): Vite.Plugin => {
         filename,
         packageName: config.packageName,
       });
-      const result = Transform(code, {
+      const result = transform(code, {
         filename,
         fileId,
-        themes: config.themes,
+        helper: "",
       });
+
+      if (result.type === "Err")
+        throw new Error(result.errors.map((err) => err.message).join("\n"));
+      if (!result.css) return;
+      if (isSSR) return { code: result.code, map: result.map };
+      const params = new URLSearchParams({
+        [CSS_PARAM_NAME]: result.css,
+      });
+      const importCSS = `import ${JSON.stringify(
+        `${VIRTUAL_MODULE_ID}?${params.toString()}`
+      )};`;
+      return {
+        code: `${result.code}\n${importCSS}`,
+        map: result.map,
+      };
     },
   };
 };

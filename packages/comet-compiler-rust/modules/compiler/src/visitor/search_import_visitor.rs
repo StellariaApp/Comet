@@ -34,20 +34,20 @@ impl VisitMut for SearchImportVisitor<'_> {
         if *self.import_source == import_src {
             for specifier in import_decl.specifiers.iter() {
                 match specifier {
-                    // import { css, css as _css } from 'target'
+                    // import { css, css as _css } from 'comet'
                     ast::ImportSpecifier::Named(import_named) => {
                         let import_ident: Option<&ast::Ident> = match &import_named.imported {
                             Some(import_named_imported) => {
                                 match import_named_imported {
-                                    // import { css as _css } from 'target'
+                                    // import { css as _css } from 'comet'
                                     ast::ModuleExportName::Ident(imported_ident) => {
                                         Some(imported_ident)
                                     }
-                                    // import { "css" as css } from 'target'
+                                    // import { "css" as css } from 'comet'
                                     ast::ModuleExportName::Str(_) => None,
                                 }
                             }
-                            // import { css } from 'target'
+                            // import { css } from 'comet'
                             None => Some(&import_named.local),
                         };
 

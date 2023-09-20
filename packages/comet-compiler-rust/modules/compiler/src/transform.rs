@@ -5,7 +5,7 @@ use super::{
     compiler::compile_js, error, hash::generate_hash, visitor::transform_visitor::TransformVisitor,
 };
 
-const IMPORT_SOURCE: &str = "comet";
+const IMPORT_SOURCE: &str = "@stellaria/comet";
 const IMPORT_CSS_IDENT: &str = "css";
 const IMPORT_FILE_ID_IDENT: &str = "FILE_ID";
 const CSS_FILE_ID_VARIANT: &str = "FILE_ID";
