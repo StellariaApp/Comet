@@ -1,5 +1,11 @@
 # @stellaria/comet-compiler-rust
 
+## 0.0.4
+
+### Patch Changes
+
+- ef1795a: patch
+
 ## 0.0.3
 
 ### Patch Changes
