@@ -27,7 +27,7 @@
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "dependencies": {
-    "@stellaria/comet-compiler-rust": "workspace:*",
+    "@stellaria/comet-compiler-rust": "*",
     "esbuild": "^0.19.2"
   },
   "devDependencies": {
