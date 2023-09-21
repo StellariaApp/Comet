@@ -1,5 +1,13 @@
 # @stellaria/comet-compiler
 
+## 0.0.2
+
+### Patch Changes
+
+- 7871933: Patch
+- Updated dependencies [7871933]
+  - @stellaria/comet-compiler-rust@0.0.2
+
 ## 0.0.1
 
 ### Patch Changes
