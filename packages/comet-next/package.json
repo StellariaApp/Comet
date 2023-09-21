@@ -1,6 +1,13 @@
 {
   "name": "@stellaria/comet-next",
   "version": "1.0.0",
+  "author": "William JCR (WillishakespeareSKR13)",
+  "description": "Comet plugin for Next.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/StellariaApp/Comet.git",
+    "directory": "packages/comet-next"
+  },
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -18,14 +25,11 @@
   "devDependencies": {
     "typescript-config-stellaria-comet": "*",
     "@stellaria/comet": "*",
-    "@types/react": "^18.2.0",
-    "@types/react-dom": "^18.2.0",
     "next": "^13.4.19",
     "eslint": "^7.32.0",
     "eslint-config-stellaria-comet": "*",
-    "react": "^18.2.0",
     "tsup": "^5.10.1",
-    "typescript": "^4.5.3"
+    "typescript": "^5.1.6"
   },
   "publishConfig": {
     "access": "public"

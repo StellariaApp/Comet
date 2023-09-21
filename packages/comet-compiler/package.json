@@ -1,6 +1,13 @@
 {
   "name": "@stellaria/comet-compiler",
   "version": "1.0.0",
+  "author": "William JCR (WillishakespeareSKR13)",
+  "description": "A compiler to Comet Library",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/StellariaApp/Comet.git",
+    "directory": "packages/comet-compiler"
+  },
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -15,6 +22,9 @@
     "lint": "eslint \"src/**/*.ts*\"",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
+  "dependencies": {
+    "@stellaria/comet-compiler-rust": "*"
+  },
   "devDependencies": {
     "typescript-config-stellaria-comet": "*",
     "@types/react": "^18.2.0",
@@ -23,7 +33,7 @@
     "eslint-config-stellaria-comet": "*",
     "react": "^18.2.0",
     "tsup": "^5.10.1",
-    "typescript": "^4.5.3"
+    "typescript": "^5.1.6"
   },
   "publishConfig": {
     "access": "public"

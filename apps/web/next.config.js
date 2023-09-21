@@ -1,6 +1,8 @@
-const withComet = require('@stellaria/comet-next');
+// const withComet = require('@stellaria/comet-next');
 
 
-module.exports = withComet({
-  reactStrictMode: true,
-});
+// module.exports = withComet({
+//   reactStrictMode: true,
+// });
+
+module.exports = {}

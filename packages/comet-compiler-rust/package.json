@@ -1,0 +1,38 @@
+{
+  "name": "@stellaria/comet-compiler-rust",
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "William JCR (WillishakespeareSKR13)",
+  "description": "A compiler for Comet written in Rust",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/StellariaApp/Comet.git",
+    "directory": "packages/comet-compiler-rust"
+  },
+  "sideEffects": false,
+  "type": "module",
+  "types": "./dist/web/comet_compiler.d.ts",
+  "main": "./dist/node/comet_compiler.js",
+  "exports": {
+    ".": {
+      "types": "./dist/node/comet_compiler.d.ts",
+      "browser": "./dist/web/comet_compiler.js",
+      "default": "./dist/node/comet_compiler.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsx ./src/index.ts"
+  },
+  "devDependencies": {
+    "typescript-config-stellaria-comet": "*",
+    "eslint": "^7.32.0",
+    "eslint-config-stellaria-comet": "*",
+    "typescript": "^5.1.6"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
