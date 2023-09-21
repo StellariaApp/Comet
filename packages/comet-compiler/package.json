@@ -22,6 +22,9 @@
     "lint": "eslint \"src/**/*.ts*\"",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
+  "dependencies": {
+    "@stellaria/comet-compiler-rust": "*"
+  },
   "devDependencies": {
     "typescript-config-stellaria-comet": "*",
     "@types/react": "^18.2.0",

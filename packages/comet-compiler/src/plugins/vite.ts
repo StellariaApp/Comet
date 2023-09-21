@@ -77,5 +77,3 @@ export const Comet = (): Vite.Plugin => {
     },
   };
 };
-
-export default Comet;

@@ -30,11 +30,7 @@
     "typescript-config-stellaria-comet": "*",
     "eslint": "^7.32.0",
     "eslint-config-stellaria-comet": "*",
-    "tsx": "^3.12.7",
-    "rimraf": "^5.0.1",
-    "typescript": "^5.1.6",
-    "vitest": "^0.33.0",
-    "wasm-pack": "^0.12.1"
+    "typescript": "^5.1.6"
   },
   "publishConfig": {
     "access": "public"

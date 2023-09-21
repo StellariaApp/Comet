@@ -11,16 +11,14 @@
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "dependencies": {
-    "preact": "^10.16.0"
+    "preact": "^10.16.0",
+    "@stellaria/comet": "*",
+    "@stellaria/comet-vite": "*"
   },
   "devDependencies": {
     "@preact/preset-vite": "^2.5.0",
-    "@stellaria/comet": "*",
-    "@stellaria/comet-next": "*",
-    "@stellaria/comet-compiler": "*",
     "typescript-config-stellaria-comet": "*",
     "eslint-config-stellaria-comet": "*",
-    "typescript": "^5.0.2",
-    "vite": "^4.4.5"
+    "typescript": "^5.0.2"
   }
 }

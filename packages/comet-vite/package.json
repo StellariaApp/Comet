@@ -22,9 +22,13 @@
     "lint": "eslint \"src/**/*.ts*\"",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
+  "dependencies": {
+    "@stellaria/comet": "*",
+    "@stellaria/comet-compiler": "*",
+    "@stellaria/comet-compiler-rust": "*"
+  },
   "devDependencies": {
     "typescript-config-stellaria-comet": "*",
-    "@stellaria/comet": "*",
     "eslint": "^7.32.0",
     "eslint-config-stellaria-comet": "*",
     "tsup": "^5.10.1",
