@@ -10,6 +10,7 @@ import {
   VIRTUAL_MODULE_ID,
 } from "../constants";
 import { CreateFileId } from "../core/CreateFile";
+import { FlatObject } from "../core/FlatObject";
 
 export const Comet = (): Vite.Plugin => {
   let config = {} as ResolvedConfig;
@@ -54,10 +55,11 @@ export const Comet = (): Vite.Plugin => {
         filename,
         packageName: config.packageName,
       });
+      const varsFlat = FlatObject(config?.vars);
       const result = transform(code, {
         filename,
         fileId,
-        helper: "",
+        helper: `:root{--temp-var:red}`,
       });
 
       if (result.type === "Err")
@@ -70,8 +72,9 @@ export const Comet = (): Vite.Plugin => {
       const importCSS = `import ${JSON.stringify(
         `${VIRTUAL_MODULE_ID}?${params.toString()}`
       )};`;
+      const newCode = `${result.code}\n${importCSS}`;
       return {
-        code: `${result.code}\n${importCSS}`,
+        code: newCode,
         map: result.map,
       };
     },

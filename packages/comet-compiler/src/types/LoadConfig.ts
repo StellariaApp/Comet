@@ -1,4 +1,5 @@
 import { Filter, FilterPattern } from "./CreateFilter";
+import { Keys } from "./Keys";
 import { Themes } from "./Themes";
 
 export type Config = {
@@ -6,6 +7,7 @@ export type Config = {
   include?: FilterPattern;
   exclude?: FilterPattern;
   themes?: Themes;
+  vars?: Keys;
 };
 
 export type ResolvedConfig = {
@@ -13,6 +15,7 @@ export type ResolvedConfig = {
   packageName: string;
   filter: Filter;
   themes?: Themes;
+  vars?: Keys;
   dependencies: string[];
 };
 

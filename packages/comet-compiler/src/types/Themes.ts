@@ -1,3 +1,5 @@
+import { Keys } from "./Keys";
+
 export type Themes = {
-  [key: string]: Themes | string;
+  [key: string]: Keys | string;
 };

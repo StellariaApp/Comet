@@ -1,8 +1,11 @@
-use serde::{Deserialize, Serialize};
+use serde::{ Deserialize, Serialize };
 use swc_core::ecma::visit::VisitMutWith;
 
 use super::{
-    compiler::compile_js, error, hash::generate_hash, visitor::transform_visitor::TransformVisitor,
+    compiler::compile_js,
+    error,
+    hash::generate_hash,
+    visitor::transform_visitor::TransformVisitor,
 };
 
 const IMPORT_SOURCE: &str = "@stellaria/comet";
@@ -27,24 +30,21 @@ pub struct Output {
 }
 
 pub fn transform(code: String, config: Config) -> Result<Output, error::Error> {
-    let file_id =
-        generate_hash(&config.file_id.unwrap_or(DEFAULT_FILE_ID.to_string())).map_err(|err| {
+    let file_id = generate_hash(&config.file_id.unwrap_or(DEFAULT_FILE_ID.to_string())).map_err(
+        |err| {
             error::Error {
                 errors: vec![error::Diagnostic {
                     message: err.to_string(),
                 }],
             }
-        })?;
+        }
+    )?;
 
     let mut css = String::new();
 
     let file_id_decl = format!("${}:{};", &CSS_FILE_ID_VARIANT, &file_id);
 
-    let helper_css = format!(
-        "{}\n{}",
-        &file_id_decl,
-        config.helper.unwrap_or(String::new())
-    );
+    let helper_css = format!("{}\n{}", &file_id_decl, config.helper.unwrap_or(String::new()));
 
     let import_source = &IMPORT_SOURCE.to_string();
     let import_css_ident = &IMPORT_CSS_IDENT.to_string();
@@ -63,7 +63,7 @@ pub fn transform(code: String, config: Config) -> Result<Output, error::Error> {
             import_css_ident,
             import_file_id_ident,
             &file_id,
-            &helper_css,
+            &helper_css
         );
 
         module.visit_mut_with(&mut transform_visitor);
@@ -74,11 +74,12 @@ pub fn transform(code: String, config: Config) -> Result<Output, error::Error> {
     });
 
     match result {
-        Ok(result) => Ok(Output {
-            code: result.code,
-            map: result.map,
-            css,
-        }),
+        Ok(result) =>
+            Ok(Output {
+                code: result.code,
+                map: result.map,
+                css,
+            }),
         Err(err) => Err(error::Error { errors: err.errors }),
     }
 }

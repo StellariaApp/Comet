@@ -86,6 +86,7 @@ export const LoadConfig: LoadConfigFn = async (root) => {
     packageName,
     filter: CreateFilter(config?.include ?? DEFAULT_INCLUDE, config?.exclude),
     themes: config?.themes,
+    vars: config?.vars,
     dependencies,
   };
 };
