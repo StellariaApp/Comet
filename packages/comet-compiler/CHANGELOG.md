@@ -1,5 +1,13 @@
 # @stellaria/comet-compiler
 
+## 1.1.1
+
+### Patch Changes
+
+- dc736f5: Path Change
+- Updated dependencies [dc736f5]
+  - @stellaria/comet-compiler-rust@1.1.1
+
 ## 1.1.0
 
 ### Minor Changes
