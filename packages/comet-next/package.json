@@ -1,6 +1,6 @@
 {
   "name": "@stellaria/comet-next",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "author": "William JCR (WillishakespeareSKR13)",
   "description": "Comet plugin for Next.js",
   "repository": {

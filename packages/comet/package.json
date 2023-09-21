@@ -1,6 +1,6 @@
 {
   "name": "@stellaria/comet",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "author": "William JCR (WillishakespeareSKR13)",
   "description": "CSS in JS compiler for Stellaria",
   "repository": {
