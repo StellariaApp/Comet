@@ -26,16 +26,37 @@
     "lint": "eslint \"src/**/*.ts*\"",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@stellaria/comet-compiler-rust": "workspace:*",
+    "esbuild": "^0.19.2"
+  },
   "devDependencies": {
-    "@stellaria/comet-compiler-rust": "*",
     "typescript-config-stellaria-comet": "*",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
+    "next": "^13.4.19",
+    "vite": "^4.4.4",
+    "webpack": "^5.88.1",
     "eslint": "^7.32.0",
     "eslint-config-stellaria-comet": "*",
     "react": "^18.2.0",
     "tsup": "^5.10.1",
     "typescript": "^5.1.6"
+  },
+  "peerDependencies": {
+    "next": "^13",
+    "vite": "^4",
+    "webpack": "^5"
+  },
+  "peerDependenciesMeta": {
+    "next": {
+      "optional": true
+    },
+    "vite": {
+      "optional": true
+    },
+    "webpack": {
+      "optional": true
+    }
   }
 }
