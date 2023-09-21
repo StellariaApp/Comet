@@ -22,20 +22,41 @@ To start using Comet in your project, follow these steps:
    npm install @stellaria/comet
    ```
 
-2. Use with Next js
+2. Configuration:
 
-   Install the Comet Next.js plugin:
+- With Next.js:
 
-   ```bash
-   npm install @stellaria/comet-next
-   ```
+  Install the Comet Next.js plugin:
 
-   Add the plugin to your `next.config.js` file:
+  ```bash
+  npm install @stellaria/comet-next
+  ```
 
-   ```javascript
-   const withComet = require("@stellaria/comet-next");
-   module.exports = withComet({});
-   ```
+  Add the plugin to your `next.config.js` file:
+
+  ```javascript
+  const withComet = require("@stellaria/comet-next");
+  module.exports = withComet({});
+  ```
+
+- With Vite:
+
+  Install the Comet Vite plugin:
+
+  ```bash
+  npm install @stellaria/comet-vite
+  ```
+
+  Add the plugin to your `vite.config.js` file:
+
+  ```javascript
+  import { defineConfig } from "vite";
+  import Comet from "@stellaria/comet-vite";
+
+  export default defineConfig({
+    plugins: [Comet()],
+  });
+  ```
 
 3. Start creating stylish components using Comet's styling API.
 
