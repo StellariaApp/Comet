@@ -10,8 +10,6 @@
   "ignore": [
     "@stellaria/comet-web",
     "@stellaria/comet-web-vite",
-    "@stellaria/comet-web-docs",
-    "typescript-config-stellaria-comet",
-    "eslint-config-stellaria-comet"
+    "@stellaria/comet-web-docs"
   ]
 }
