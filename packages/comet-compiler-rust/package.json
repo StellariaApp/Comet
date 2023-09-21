@@ -1,6 +1,6 @@
 {
   "name": "@stellaria/comet-compiler-rust",
-  "version": "1.1.1",
+  "version": "0.0.0",
   "license": "MIT",
   "author": "William JCR (WillishakespeareSKR13)",
   "description": "A compiler for Comet written in Rust",
