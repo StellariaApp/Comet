@@ -1,6 +1,10 @@
 {
   "name": "@stellaria/comet-next",
   "version": "0.0.1",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "author": "William JCR (WillishakespeareSKR13)",
   "description": "Comet plugin for Next.js",
   "repository": {
@@ -30,8 +34,5 @@
     "eslint-config-stellaria-comet": "*",
     "tsup": "^5.10.1",
     "typescript": "^5.1.6"
-  },
-  "publishConfig": {
-    "access": "public"
   }
 }

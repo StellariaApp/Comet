@@ -1,6 +1,10 @@
 {
   "name": "@stellaria/comet-compiler-rust",
   "version": "0.0.1",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "license": "MIT",
   "author": "William JCR (WillishakespeareSKR13)",
   "description": "A compiler for Comet written in Rust",
@@ -31,8 +35,5 @@
     "eslint": "^7.32.0",
     "eslint-config-stellaria-comet": "*",
     "typescript": "^5.1.6"
-  },
-  "publishConfig": {
-    "access": "public"
   }
 }

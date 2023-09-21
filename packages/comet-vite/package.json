@@ -1,6 +1,10 @@
 {
   "name": "@stellaria/comet-vite",
   "version": "0.0.1",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "author": "William JCR (WillishakespeareSKR13)",
   "description": "A Vite plugin for Comet",
   "repository": {
@@ -33,8 +37,5 @@
     "eslint-config-stellaria-comet": "*",
     "tsup": "^5.10.1",
     "typescript": "^5.1.6"
-  },
-  "publishConfig": {
-    "access": "public"
   }
 }
