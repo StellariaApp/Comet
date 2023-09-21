@@ -1,5 +1,11 @@
 # @stellaria/comet-next
 
+## 0.0.3
+
+### Patch Changes
+
+- 13be145: Patch
+
 ## 0.0.2
 
 ### Patch Changes
