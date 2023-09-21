@@ -45,6 +45,7 @@ export const Comet = (): Vite.Plugin => {
       const isSSR = options?.ssr ?? false;
 
       const [filename] = id.split("?");
+      console.log("filename", filename);
 
       if (!filename) return;
       if (filename.includes("/node_modules/")) return;

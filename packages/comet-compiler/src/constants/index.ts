@@ -16,6 +16,7 @@ export const CONFIG_FILES = [
 ];
 
 export const DEFAULT_INCLUDE = /\.(js|jsx|ts|tsx)$/;
+export const DEFAULT_EXCLUDE = /node_modules/;
 
 export const VIRTUAL_MODULE_ID = "virtual:comet.css";
 export const RESOLVED_VIRTUAL_MODULE_ID = "\0" + VIRTUAL_MODULE_ID;

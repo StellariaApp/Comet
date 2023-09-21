@@ -3,7 +3,7 @@ import path from "node:path";
 import url from "node:url";
 import * as esbuild from "esbuild";
 import type { Config, LoadConfigFn } from "../types/LoadConfig";
-import { CONFIG_FILES, DEFAULT_INCLUDE } from "../constants";
+import { CONFIG_FILES, DEFAULT_EXCLUDE, DEFAULT_INCLUDE } from "../constants";
 import { CreateFilter } from "./CreateFilter";
 
 import { IsESM } from "./IsESM";
@@ -84,7 +84,10 @@ export const LoadConfig: LoadConfigFn = async (root) => {
   return {
     root,
     packageName,
-    filter: CreateFilter(config?.include ?? DEFAULT_INCLUDE, config?.exclude),
+    filter: CreateFilter(
+      config?.include ?? DEFAULT_INCLUDE,
+      config?.exclude ?? DEFAULT_EXCLUDE
+    ),
     themes: config?.themes,
     vars: config?.vars,
     dependencies,
