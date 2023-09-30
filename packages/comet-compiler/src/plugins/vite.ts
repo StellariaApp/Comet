@@ -45,7 +45,6 @@ export const Comet = (): Vite.Plugin => {
       const isSSR = options?.ssr ?? false;
 
       const [filename] = id.split("?");
-      console.log("filename", filename);
 
       if (!filename) return;
       if (filename.includes("/node_modules/")) return;
@@ -60,15 +59,17 @@ export const Comet = (): Vite.Plugin => {
       const result = transform(code, {
         filename,
         fileId,
-        helper: `:root{--temp-var:red}`,
+        helper: `:root{}`,
       });
 
       if (result.type === "Err")
         throw new Error(result.errors.map((err) => err.message).join("\n"));
       if (!result.css) return;
       if (isSSR) return { code: result.code, map: result.map };
+      const vars = `:root {\n${varsFlat}\n}`;
+      const cssWithVars = `${vars}\n${result.css}`;
       const params = new URLSearchParams({
-        [CSS_PARAM_NAME]: result.css,
+        [CSS_PARAM_NAME]: cssWithVars,
       });
       const importCSS = `import ${JSON.stringify(
         `${VIRTUAL_MODULE_ID}?${params.toString()}`

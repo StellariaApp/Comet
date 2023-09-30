@@ -4,18 +4,26 @@ import "./app.css";
 
 import { css } from "@stellaria/comet";
 
+const theme = {
+  colors: {
+    primary: "red",
+    secondary: "blue",
+  },
+};
+
 const styles = css`
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100px;
   width: 200px;
-  background-color: red;
+  background-color: var(--colors-primary-light);
   color: white;
 `;
 
 const styles2 = css`
-  background-color: blue;
+  --colors-primary-light: blue;
+  background-color: var(--colors-primary-light);
   color: white;
   width: 200px;
   height: 100px;
