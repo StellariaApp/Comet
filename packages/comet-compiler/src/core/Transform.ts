@@ -1,13 +1,11 @@
 import type { TransformFn } from "../types/Transform";
+import { ParseObject } from "./FlatObject";
 
-const ImportSourceRegex =
-  /import\s*\{([^}]*)\}\s*from\s*['"]@stellaria\/comet['"]/g;
+const ImportRegex =
+  /import\s*{\s*([^}]+)\s*}\s*from\s*"(?=@stellaria\/comet)@stellaria\/comet"/;
 
 const CSSRegex =
   /(?<var>const|let|var)\s+(?<name>\w+)\s*=\s*css\s*`(?<css>[^]*?)`/;
-
-const CSSGroupRegex =
-  /(?<var>const|let|var)\s+(?<name>\w+)\s*=\s*css\s*`(?<css>[^]*?)`/g;
 
 type Style = {
   var: string;
@@ -18,12 +16,27 @@ type Style = {
 
 const StyleSheet = new Map<string, Style>();
 
+type Variable = {
+  key: string;
+  value: string;
+};
+
+const Variables = new Map<string, Variable>();
+
 export const Transform: TransformFn = (source, config) => {
-  const { fileId, filename } = config ?? {};
+  const { fileId } = config ?? {};
 
   var code = source;
 
-  const stylesRaw = source.match(CSSGroupRegex);
+  const notMatched = { code, css: "", map: "", vars: "" };
+  const hasImport = code.match(ImportRegex);
+  if (!hasImport) return notMatched;
+
+  const functions = hasImport?.[1].split(",").map((i) => i.trim());
+
+  code = getVars(code, functions);
+
+  const stylesRaw = code.match(new RegExp(CSSRegex, "g"));
 
   stylesRaw?.forEach((style) => {
     const { var: varType, name, css } = style.match(CSSRegex)?.groups ?? {};
@@ -32,15 +45,65 @@ export const Transform: TransformFn = (source, config) => {
     StyleSheet.set(`${fileId}:${name}`, { var: varType, name, css, hash });
   });
 
+  const vars = Array.from(Variables.values())
+    .map(({ key, value }) => `${key}:${value};`)
+    .join("\n");
+
+  const rootVars = `:root{${vars}}`;
+
   const css = Array.from(StyleSheet.values())
     .map(({ hash, css }) => `.${hash}{${css}}`)
     .join("\n");
 
+  const cssWithRoot = `${rootVars}\n${css}`;
+
   return {
     code: code,
-    css,
-    hasStyles: true,
+    css: cssWithRoot,
+    vars: "",
   };
+};
+
+const VariablesRegex =
+  /(const|var|let)\s+([\w$]+)\s*=\s*variables\(([\s\S]+?)\);/;
+
+const getVars = (code: string, functions: string[]) => {
+  const isUsed = functions?.includes("variables");
+  if (!isUsed) return code;
+
+  const match = code.match(VariablesRegex);
+  if (!match) return code;
+
+  const typeVar = match?.[1];
+  const nameVar = match?.[2];
+  const objectVar = match?.[3];
+
+  const objectFormat = objectVar.replace(
+    /(['"])?([a-zA-Z0-9_]+)(['"])?:/g,
+    '"$2":'
+  );
+
+  const jsonParsed = JSON.parse(objectFormat);
+
+  const { parsed, variables } = ParseObject(jsonParsed);
+
+  variables.forEach(({ variable, value }) => {
+    Variables.set(variable, { key: variable, value });
+  });
+
+  let codeParse = code.replace(
+    VariablesRegex,
+    `${typeVar} ${nameVar} = variables(${JSON.stringify(parsed)});`
+  );
+
+  variables.forEach(({ key, variable }) => {
+    const name = `${nameVar}.${key}`;
+    const escapedName = name.replace(/[-\/\\^$*+?.()|[\]{}]/g, "\\$&");
+    const regex = new RegExp(`\\$\\{${escapedName}\\}`, "g");
+    codeParse = codeParse.replace(regex, `var(${variable})`);
+  });
+
+  return codeParse;
 };
 
 const generateHash = (input: string) => {

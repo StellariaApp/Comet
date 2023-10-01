@@ -6,7 +6,7 @@ const buttonStyles = css`
   align-items: center;
   height: 100px;
   width: 300px;
-  background-color: green;
+  background-color: blue;
   color: white;
   font-size: 20px;
   font-weight: bold;

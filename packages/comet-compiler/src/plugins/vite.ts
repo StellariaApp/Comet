@@ -10,7 +10,6 @@ import {
   VIRTUAL_MODULE_ID,
 } from "../constants";
 import { CreateFileId } from "../core/CreateFile";
-import { FlatObject, cssWithVars } from "../core/FlatObject";
 
 export const Comet = (): Vite.Plugin => {
   let config = {} as ResolvedConfig;
@@ -54,18 +53,15 @@ export const Comet = (): Vite.Plugin => {
         packageName: config.packageName,
       });
 
-      const { code, css, hasStyles } = Transform(source, {
+      const { code, css } = Transform(source, {
         fileId,
         filename,
       });
 
-      if (!hasStyles) return;
       if (!css) return;
 
-      const newCSS = cssWithVars(css, config?.vars);
-
       const params = new URLSearchParams({
-        [CSS_PARAM_NAME]: newCSS,
+        [CSS_PARAM_NAME]: css,
       });
 
       const importCSS = `import ${JSON.stringify(

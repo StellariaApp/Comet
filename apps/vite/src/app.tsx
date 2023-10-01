@@ -2,48 +2,31 @@ import { useState } from "preact/hooks";
 
 import "./app.css";
 
-import { css } from "@stellaria/comet";
 import AtomButton from "./components/atom/button";
 
-const theme = {
+import { css, variables } from "@stellaria/comet";
+
+const vars = variables({
   colors: {
-    primary: "red",
-    secondary: "blue",
+    backgroundColor: "#2437e2",
+    color: "#fff",
+    hover: "#4c1bd9",
   },
-};
+});
 
 const styles = css`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100px;
-  width: 200px;
-  background-color: var(--colors-primary-light);
-  color: white;
-`;
-
-const styles2 = css`
-  --colors-primary-light: red;
-  background-color: var(--colors-primary-light);
-  color: white;
-  width: 200px;
-  height: 100px;
-  border-radius: 10px;
-  border: 1px solid black;
-  margin: 10px;
-  padding: 10px;
-  box-sizing: border-box;
+  border: none;
+  text-align: center;
+  padding: 12px 30px;
+  font-size: 20px;
+  line-height: 28px;
+  border-radius: 4px;
+  background-color: ${vars.colors.backgroundColor};
+  color: ${vars.colors.color};
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
   &:hover {
-    background-color: yellow;
-  }
-`;
-
-const styles3 = css`
-  background-color: green;
-  color: white;
-
-  &:hover {
-    background-color: yellow;
+    background-color: ${vars.colors.hover};
   }
 `;
 
@@ -56,15 +39,6 @@ export function App() {
       <button class={styles} onClick={() => setCount((count) => count + 1)}>
         count is {count}
       </button>
-      <span>class hash is {styles}</span>
-      <button class={styles2} onClick={() => setCount((count) => count - 1)}>
-        count is {count}
-      </button>
-      <span>class hash is {styles2}</span>
-      <button class={styles3} onClick={() => setCount((count) => count - 1)}>
-        count is {count}
-      </button>
-      <span>class hash is {styles3}</span>
     </div>
   );
 }

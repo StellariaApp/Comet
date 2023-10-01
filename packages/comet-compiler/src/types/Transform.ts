@@ -6,7 +6,7 @@ export type TransformOptions = {
 export type TransformOutput = {
   code: string;
   css: string;
-  hasStyles: boolean;
+  vars: string;
 };
 
 export type TransformFn = (
