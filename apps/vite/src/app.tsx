@@ -48,16 +48,23 @@ const wrapper = css`
   align-items: center;
 `;
 
+const classes = (count: number) => `${button} ${count > 2 ? error : ""}`;
+
 export function App() {
   const [count, setCount] = useState(0);
+  const [count2, setCount2] = useState(0);
+
+  const setter = () => setCount((count) => count + 1);
+  const setter2 = () => setCount2((count2) => count2 + 1);
 
   return (
     <div class={wrapper}>
-      <button
-        class={`${button} ${count > 2 ? error : ""}`}
-        onClick={() => setCount((count) => count + 1)}
-      >
-        count is {count}
+      <button class={button}>Without Error</button>
+      <button class={classes(count)} onClick={setter}>
+        {count}
+      </button>
+      <button class={classes(count2)} onClick={setter2}>
+        {count2}
       </button>
     </div>
   );
