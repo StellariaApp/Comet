@@ -3,6 +3,7 @@ import { useState } from "preact/hooks";
 import "./app.css";
 
 import { css } from "@stellaria/comet";
+import AtomButton from "./components/atom/button";
 
 const theme = {
   colors: {
@@ -22,7 +23,7 @@ const styles = css`
 `;
 
 const styles2 = css`
-  --colors-primary-light: blue;
+  --colors-primary-light: red;
   background-color: var(--colors-primary-light);
   color: white;
   width: 200px;
@@ -51,6 +52,7 @@ export function App() {
 
   return (
     <div>
+      <AtomButton />
       <button class={styles} onClick={() => setCount((count) => count + 1)}>
         count is {count}
       </button>
