@@ -1,42 +1,61 @@
 import { useState } from "preact/hooks";
 
-import "./app.css";
-
-import AtomButton from "./components/atom/button";
-
 import { css, variables } from "@stellaria/comet";
 
 const vars = variables({
-  colors: {
-    backgroundColor: "#2437e2",
-    color: "#fff",
-    hover: "#4c1bd9",
+  button: {
+    background: "#0072f5",
+    text: "#ffffff",
+    boxShadow: "0 0 0.5rem rgba(0, 0, 0, 0.1)",
+    hoverBackground: "#0062d5",
   },
 });
 
-const styles = css`
-  border: none;
-  text-align: center;
-  padding: 12px 30px;
-  font-size: 20px;
-  line-height: 28px;
-  border-radius: 4px;
-  background-color: ${vars.colors.backgroundColor};
-  color: ${vars.colors.color};
-  cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
+const button = css`
+  width: max-content;
+  padding: 0.7rem 1rem;
+  border-radius: 0.32rem;
+  border: 1px solid #225a99;
+  background-color: ${vars.button.background};
+  color: ${vars.button.text};
+  box-shadow: ${vars.button.boxShadow};
   &:hover {
-    background-color: ${vars.colors.hover};
+    background-color: ${vars.button.hoverBackground};
+    transform: scale(1.12);
   }
+  &:active {
+    transform: scale(0.98);
+  }
+
+  transition: all 0.2s ease-in-out;
+`;
+
+const error = css`
+  background-color: #e71f33;
+  border-color: #a51220;
+  &:hover {
+    background-color: #d61d30;
+    border-color: #8f0f1c;
+  }
+`;
+
+const wrapper = css`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export function App() {
   const [count, setCount] = useState(0);
 
   return (
-    <div>
-      <AtomButton />
-      <button class={styles} onClick={() => setCount((count) => count + 1)}>
+    <div class={wrapper}>
+      <button
+        class={`${button} ${count > 2 ? error : ""}`}
+        onClick={() => setCount((count) => count + 1)}
+      >
         count is {count}
       </button>
     </div>
