@@ -49,7 +49,7 @@ export const Transform: TransformFn = (source, config) => {
     .map(({ key, value }) => `${key}:${value};`)
     .join("\n");
 
-  const rootVars = `:root{${vars}}`;
+  const rootVars = `:root{\n${vars}\n}`;
 
   const css = Array.from(StyleSheet.values())
     .map(({ hash, css }) => `.${hash}{${css}}`)

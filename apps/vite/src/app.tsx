@@ -12,11 +12,12 @@ const vars = variables({
 });
 
 const button = css`
+  --local-background: ${vars.button.background};
+  background-color: var(--local-background);
   width: max-content;
   padding: 0.7rem 1rem;
   border-radius: 0.32rem;
   border: 1px solid #225a99;
-  background-color: ${vars.button.background};
   color: ${vars.button.text};
   box-shadow: ${vars.button.boxShadow};
   &:hover {
