@@ -1,6 +1,6 @@
 import type * as Vite from "vite";
 
-import { transform } from "@stellaria/comet-compiler-rust";
+import { Transform } from "../core/Transform";
 
 import { ResolvedConfig } from "../types/LoadConfig";
 import { LoadConfig } from "../core/LoadConfig";
@@ -10,7 +10,7 @@ import {
   VIRTUAL_MODULE_ID,
 } from "../constants";
 import { CreateFileId } from "../core/CreateFile";
-import { FlatObject } from "../core/FlatObject";
+import { FlatObject, cssWithVars } from "../core/FlatObject";
 
 export const Comet = (): Vite.Plugin => {
   let config = {} as ResolvedConfig;
@@ -41,9 +41,7 @@ export const Comet = (): Vite.Plugin => {
       }
     },
 
-    transform(code, id, options) {
-      const isSSR = options?.ssr ?? false;
-
+    transform(source, id, options) {
       const [filename] = id.split("?");
 
       if (!filename) return;
@@ -55,29 +53,29 @@ export const Comet = (): Vite.Plugin => {
         filename,
         packageName: config.packageName,
       });
-      const varsFlat = FlatObject(config?.vars);
-      const result = transform(code, {
-        filename,
+
+      const { code, css, hasStyles } = Transform(source, {
         fileId,
-        helper: `:root{}`,
+        filename,
       });
 
-      if (result.type === "Err")
-        throw new Error(result.errors.map((err) => err.message).join("\n"));
-      if (!result.css) return;
-      if (isSSR) return { code: result.code, map: result.map };
-      const vars = `:root {\n${varsFlat}\n}`;
-      const cssWithVars = `${vars}\n${result.css}`;
+      if (!hasStyles) return;
+      if (!css) return;
+
+      const newCSS = cssWithVars(css, config?.vars);
+
       const params = new URLSearchParams({
-        [CSS_PARAM_NAME]: cssWithVars,
+        [CSS_PARAM_NAME]: newCSS,
       });
+
       const importCSS = `import ${JSON.stringify(
         `${VIRTUAL_MODULE_ID}?${params.toString()}`
       )};`;
-      const newCode = `${result.code}\n${importCSS}`;
+
+      const newCode = `${code}\n${importCSS}`;
+
       return {
         code: newCode,
-        map: result.map,
       };
     },
   };

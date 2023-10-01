@@ -88,7 +88,6 @@ export const LoadConfig: LoadConfigFn = async (root) => {
       config?.include ?? DEFAULT_INCLUDE,
       config?.exclude ?? DEFAULT_EXCLUDE
     ),
-    themes: config?.themes,
     vars: config?.vars,
     dependencies,
   };
