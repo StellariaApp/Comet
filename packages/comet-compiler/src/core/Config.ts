@@ -2,19 +2,18 @@ import fs from "node:fs";
 import path from "node:path";
 import url from "node:url";
 import * as esbuild from "esbuild";
-import type { Config, LoadConfigFn } from "../types/LoadConfig";
+import type { Config } from "../types/LoadConfig";
 import { CONFIG_FILES, DEFAULT_EXCLUDE, DEFAULT_INCLUDE } from "../constants";
-import { CreateFilter } from "./CreateFilter";
+import { createFilter } from "./Filter";
 
-import { IsESM } from "./IsESM";
-import { GetPackageJson } from "./GetPackageJson";
-import { LookupFile } from "./LookupFile";
-import { DynamicImport } from "./DinamicImport";
+import { IsESM } from "./ESM";
+import { getPackageJson } from "./Package";
+import { getFileName } from "./File";
+import { dynamicImport } from "./Import";
 
-export const LoadConfig: LoadConfigFn = async (root) => {
-  const filename = LookupFile(root, CONFIG_FILES);
-
+export const loadConfig = async (root: string) => {
   let config = {} as Config;
+  const filename = getFileName(root, CONFIG_FILES);
 
   let dependencies: string[] = [];
 
@@ -52,7 +51,7 @@ export const LoadConfig: LoadConfigFn = async (root) => {
 
         try {
           fs.writeFileSync(outputFilename, code);
-          const module = (await DynamicImport(
+          const module = (await dynamicImport(
             isESM ? url.pathToFileURL(outputFilename).href : outputFilename,
             isESM
           )) as { default?: Config };
@@ -71,7 +70,7 @@ export const LoadConfig: LoadConfigFn = async (root) => {
 
   try {
     if (config && config.packageName === undefined) {
-      const result = GetPackageJson(root);
+      const result = getPackageJson(root);
       if (result?.packageJson.name) {
         packageName = result.packageJson.name;
         dependencies.push(result.filename);
@@ -84,7 +83,7 @@ export const LoadConfig: LoadConfigFn = async (root) => {
   return {
     root,
     packageName,
-    filter: CreateFilter(
+    filter: createFilter(
       config?.include ?? DEFAULT_INCLUDE,
       config?.exclude ?? DEFAULT_EXCLUDE
     ),

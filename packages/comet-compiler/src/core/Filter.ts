@@ -1,13 +1,15 @@
-import { CreateFilterFn, FilterFn } from "../types/CreateFilter";
 import { EnsureArray } from "../utils/Array";
-import { NormalizePath } from "./NormalizePath";
+import { normalizePath } from "./Path";
 
-export const CreateFilter: CreateFilterFn = (include, exclude) => {
+export type Pattern = RegExp | RegExp[];
+export type FilterFn = (filename: string) => boolean;
+
+export const createFilter = (include: Pattern, exclude: Pattern) => {
   const includes = EnsureArray(include);
   const excludes = EnsureArray(exclude);
 
   const Filter: FilterFn = (filename) => {
-    const filenameNormalize = NormalizePath(filename);
+    const filenameNormalize = normalizePath(filename);
 
     for (const matcher of excludes) {
       if (matcher?.test(filenameNormalize)) return false;

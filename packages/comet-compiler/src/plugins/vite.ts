@@ -1,15 +1,15 @@
 import type * as Vite from "vite";
 
-import { Transform } from "../core/Transform";
-
-import { ResolvedConfig } from "../types/LoadConfig";
-import { LoadConfig } from "../core/LoadConfig";
 import {
   CSS_PARAM_NAME,
   RESOLVED_VIRTUAL_MODULE_ID,
   VIRTUAL_MODULE_ID,
 } from "../constants";
-import { CreateFileId } from "../core/CreateFile";
+
+import { Transform } from "../core/Transform";
+import { ResolvedConfig } from "../types/LoadConfig";
+import { loadConfig } from "../core/Config";
+import { createFileId } from "../core/File";
 
 export const Comet = (): Vite.Plugin => {
   let config = {} as ResolvedConfig;
@@ -17,7 +17,7 @@ export const Comet = (): Vite.Plugin => {
     name: "Comet Vite Plugin",
 
     async configResolved(viteConfig) {
-      config = await LoadConfig(viteConfig.root);
+      config = await loadConfig(viteConfig.root);
       for (const dependency of config.dependencies) {
         viteConfig.configFileDependencies.push(dependency);
       }
@@ -47,7 +47,7 @@ export const Comet = (): Vite.Plugin => {
       if (filename.includes("/node_modules/")) return;
       if (!config.filter(filename)) return;
 
-      const fileId = CreateFileId({
+      const fileId = createFileId({
         root: config.root,
         filename,
         packageName: config.packageName,
