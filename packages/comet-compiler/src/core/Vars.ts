@@ -11,8 +11,6 @@ export const getVars = (code: string, fileId?: string) => {
 
   if (!match) return code;
 
-  let codeVars = code;
-
   matchmultiple?.forEach((match) => {
     const matchVar = match.match(VariablesRegex);
     if (!matchVar) return;
@@ -36,18 +34,19 @@ export const getVars = (code: string, fileId?: string) => {
       Variables.set(variable, { key: variable, value });
     });
 
-    codeVars = codeVars.replace(
+    code = code.replace(
       match,
       `${typeVar} ${nameVar} = variables(${JSON.stringify(parsed)});`
     );
 
     variables.forEach(({ key, variable }) => {
       const keyName = key.replace(nameVarHash, nameVar);
-      const escapedName = keyName.replace(/[-\/\\^$*+?.()|[\]{}]/g, "\\$&");
-      const regex = new RegExp(`\\$\\{${escapedName}\\}`, "g");
-      codeVars = codeVars.replace(regex, `var(${variable})`);
+      const keyNameNullish = keyName.replace(/\./g, "(\\?.\\?|\\?.|\\.|)");
+      const regex = new RegExp(`\\$\\{${keyNameNullish}\\}`, "g");
+      const match = code.match(regex);
+      code = code.replace(regex, `var(${variable})`);
     });
   });
 
-  return codeVars;
+  return code;
 };
