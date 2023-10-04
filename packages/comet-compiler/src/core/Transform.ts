@@ -6,8 +6,10 @@ import { getVars } from "./Vars";
 const ImportRegex =
   /import\s*{\s*([^}]+)\s*}\s*from\s*"(?=@stellaria\/comet)@stellaria\/comet"/;
 
-const CSSRegex =
+const CSSConstRegex =
   /(?<var>const|let|var)\s+(?<name>\w+)\s*=\s*css\s*`(?<css>[^]*?)`/;
+
+const CSSObjectRegex = /(?<name>\w+)\s*:\s*css\s*`(?<css>[^]*?)`/;
 
 export type TransformOptions = Config & {
   filename?: string;
@@ -30,13 +32,35 @@ export const transform = (source: string, config: TransformOptions) => {
     code = getVars(code, fileId);
   }
 
-  const stylesRaw = code.match(new RegExp(CSSRegex, "g"));
+  const stylesRaw = code.match(new RegExp(CSSConstRegex, "g"));
+  const stylesObjectRaw = code.match(new RegExp(CSSObjectRegex, "g"));
 
   stylesRaw?.forEach((style) => {
-    const { var: varType, name, css } = style.match(CSSRegex)?.groups ?? {};
-    const hash = generateHash(css + fileId);
+    const {
+      var: varType,
+      name,
+      css,
+    } = style.match(CSSConstRegex)?.groups ?? {};
+    const hash = generateHash(css + fileId + name + varType);
     code = code.replace(style, `${varType} ${name} = "${hash}"`);
-    StyleSheet.set(`${fileId}:${name}`, { var: varType, name, css, hash });
+    StyleSheet.set(`${fileId}:${name}:${varType}`, {
+      var: varType,
+      name,
+      css,
+      hash,
+    });
+  });
+
+  stylesObjectRaw?.forEach((style) => {
+    const { name, css } = style.match(CSSObjectRegex)?.groups ?? {};
+    const hash = generateHash(css + fileId + name + "object");
+    code = code.replace(style, `${name}: "${hash}"`);
+    StyleSheet.set(`${fileId}:${name}:object`, {
+      var: "object",
+      name,
+      css,
+      hash,
+    });
   });
 
   const vars = Array.from(Variables.values())
