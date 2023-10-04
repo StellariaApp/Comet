@@ -1,5 +1,7 @@
-import type { TransformFn } from "../types/Transform";
-import { ParseObject } from "./FlatObject";
+import { Config } from "../types/Config";
+import { generateHash } from "./Hash";
+import { StyleSheet, Variables } from "./Map";
+import { getVars } from "./Vars";
 
 const ImportRegex =
   /import\s*{\s*([^}]+)\s*}\s*from\s*"(?=@stellaria\/comet)@stellaria\/comet"/;
@@ -7,23 +9,12 @@ const ImportRegex =
 const CSSRegex =
   /(?<var>const|let|var)\s+(?<name>\w+)\s*=\s*css\s*`(?<css>[^]*?)`/;
 
-type Style = {
-  var: string;
-  name: string;
-  css: string;
-  hash: string;
+export type TransformOptions = Config & {
+  filename?: string;
+  fileId?: string;
 };
 
-const StyleSheet = new Map<string, Style>();
-
-type Variable = {
-  key: string;
-  value: string;
-};
-
-const Variables = new Map<string, Variable>();
-
-export const Transform: TransformFn = (source, config) => {
+export const transform = (source: string, config: TransformOptions) => {
   const { fileId } = config ?? {};
 
   var code = source;
@@ -34,7 +25,10 @@ export const Transform: TransformFn = (source, config) => {
 
   const functions = hasImport?.[1].split(",").map((i) => i.trim());
 
-  code = getVars(code, functions);
+  const isUsedVars = functions?.includes("variables");
+  if (isUsedVars) {
+    code = getVars(code, fileId);
+  }
 
   const stylesRaw = code.match(new RegExp(CSSRegex, "g"));
 
@@ -62,81 +56,4 @@ export const Transform: TransformFn = (source, config) => {
     css: cssWithRoot,
     vars: "",
   };
-};
-
-const VariablesRegex =
-  /(const|var|let)\s+([\w$]+)\s*=\s*variables\(([\s\S]+?)\);/;
-
-const getVars = (code: string, functions: string[]) => {
-  const isUsed = functions?.includes("variables");
-  if (!isUsed) return code;
-
-  const match = code.match(VariablesRegex);
-  if (!match) return code;
-
-  const typeVar = match?.[1];
-  const nameVar = match?.[2];
-  const objectVar = match?.[3];
-
-  const objectFormat = objectVar.replace(
-    /(['"])?([a-zA-Z0-9_]+)(['"])?:/g,
-    '"$2":'
-  );
-
-  const jsonParsed = JSON.parse(objectFormat);
-
-  const { parsed, variables } = ParseObject(jsonParsed);
-
-  variables.forEach(({ variable, value }) => {
-    Variables.set(variable, { key: variable, value });
-  });
-
-  let codeParse = code.replace(
-    VariablesRegex,
-    `${typeVar} ${nameVar} = variables(${JSON.stringify(parsed)});`
-  );
-
-  variables.forEach(({ key, variable }) => {
-    const name = `${nameVar}.${key}`;
-    const escapedName = name.replace(/[-\/\\^$*+?.()|[\]{}]/g, "\\$&");
-    const regex = new RegExp(`\\$\\{${escapedName}\\}`, "g");
-    codeParse = codeParse.replace(regex, `var(${variable})`);
-  });
-
-  return codeParse;
-};
-
-const generateHash = (input: string) => {
-  const hash = murmur32(input, 0);
-  return hash === 0 ? "" : toAlphabet(hash);
-};
-
-const murmur32 = (str: string, seed: number) => {
-  let hval = seed === undefined ? 0x811c9dc5 : seed;
-
-  for (let i = 0, l = str.length; i < l; i++) {
-    hval ^= str.charCodeAt(i);
-    hval +=
-      (hval << 1) + (hval << 4) + (hval << 7) + (hval << 8) + (hval << 24);
-  }
-
-  return hval >>> 0;
-};
-
-const ALPHABET = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-const toAlphabet = (value: number) => {
-  const result = [];
-
-  while (true) {
-    result.push(ALPHABET[value % ALPHABET.length]);
-    value = Math.floor(value / ALPHABET.length);
-
-    if (value === 0) {
-      break;
-    }
-  }
-
-  result.reverse();
-  return result.join("");
 };

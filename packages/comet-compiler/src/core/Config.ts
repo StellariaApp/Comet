@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import url from "node:url";
 import * as esbuild from "esbuild";
-import type { Config } from "../types/LoadConfig";
+import type { Config } from "../types/Config";
 import { CONFIG_FILES, DEFAULT_EXCLUDE, DEFAULT_INCLUDE } from "../constants";
 import { createFilter } from "./Filter";
 
@@ -66,10 +66,10 @@ export const loadConfig = async (root: string) => {
     }
   }
 
-  let packageName = config?.packageName ?? "unknown";
+  let packageName = "unknown";
 
   try {
-    if (config && config.packageName === undefined) {
+    if (config) {
       const result = getPackageJson(root);
       if (result?.packageJson.name) {
         packageName = result.packageJson.name;
@@ -87,7 +87,7 @@ export const loadConfig = async (root: string) => {
       config?.include ?? DEFAULT_INCLUDE,
       config?.exclude ?? DEFAULT_EXCLUDE
     ),
-    vars: config?.vars,
+    config,
     dependencies,
   };
 };

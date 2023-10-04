@@ -20,8 +20,8 @@ const Join: JoinFn = (prev, params) => {
   return `${prefix ?? ""}${prev?.[key ?? "key"] ?? ""}${suffix ?? ""}`;
 };
 
-export const ParseObject = (obj?: Keys) => {
-  const result = FlatObject(obj);
+export const parseObject = (obj?: Keys, hash?: string) => {
+  const result = flatObject(obj, hash);
   const newObject = result.reduce((prev: Keys, curr: FlatObject) => {
     const { key, variable } = curr;
     const keys = key.split(".");
@@ -34,12 +34,16 @@ export const ParseObject = (obj?: Keys) => {
     return prev;
   }, {} as Keys);
   return {
-    parsed: newObject,
+    parsed: newObject[hash ?? ""],
     variables: result,
   };
 };
 
-export const FlatObject = (obj?: Keys, parent?: FlatObject): FlatObject[] => {
+export const flatObject = (
+  obj?: Keys,
+  hash?: string,
+  parent?: FlatObject
+): FlatObject[] => {
   if (!obj) return [];
 
   const result = Object.entries(obj)
@@ -47,13 +51,13 @@ export const FlatObject = (obj?: Keys, parent?: FlatObject): FlatObject[] => {
       const isObject = typeof valueObject === "object";
 
       const key = Join(parent, {
-        prefix: parent ? "" : "",
+        prefix: parent ? "" : hash ? hash + "." : "",
         suffix: (parent ? "." : "") + keyObject,
         key: "key",
       });
 
       const variable = Join(parent, {
-        prefix: parent ? "" : "--",
+        prefix: parent ? "" : `--${hash ? hash + "-" : ""}`,
         suffix: (parent ? "-" : "") + keyObject,
         key: "variable",
       });
@@ -65,7 +69,7 @@ export const FlatObject = (obj?: Keys, parent?: FlatObject): FlatObject[] => {
       } as FlatObject;
 
       if (!isObject) return newParent;
-      const child = FlatObject(valueObject, newParent);
+      const child = flatObject(valueObject, hash, newParent);
       return child;
     })
     .flat();

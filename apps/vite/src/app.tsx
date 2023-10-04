@@ -1,27 +1,28 @@
 import { useState } from "preact/hooks";
 
-import { css, variables } from "@stellaria/comet";
+import { css, cx, variables } from "@stellaria/comet";
 
 const vars = variables({
-  button: {
-    background: "#0072f5",
-    text: "#ffffff",
-    boxShadow: "0 0 0.5rem rgba(0, 0, 0, 0.1)",
-    hoverBackground: "#0062d5",
-  },
+  background: "#0072f5",
+  text: "#ffffff",
+  boxShadow: "0 0 0.5rem rgba(0, 0, 0, 0.1)",
+  hoverBackground: "#0062d5",
+});
+
+const vars2 = variables({
+  border: "#229971",
 });
 
 const button = css`
-  --local-background: ${vars.button.background};
-  background-color: var(--local-background);
+  background-color: ${vars.background};
   width: max-content;
   padding: 0.7rem 1rem;
   border-radius: 0.32rem;
-  border: 1px solid #225a99;
-  color: ${vars.button.text};
-  box-shadow: ${vars.button.boxShadow};
+  border: 2px solid ${vars2.border};
+  color: ${vars.text};
+  box-shadow: ${vars.boxShadow};
   &:hover {
-    background-color: ${vars.button.hoverBackground};
+    background-color: ${vars.hoverBackground};
     transform: scale(1.12);
   }
   &:active {
@@ -48,23 +49,17 @@ const wrapper = css`
   align-items: center;
 `;
 
-const classes = (count: number) => `${button} ${count > 2 ? error : ""}`;
+const classes = (count: number) => cx([button, count > 5 && error]);
 
 export function App() {
   const [count, setCount] = useState(0);
-  const [count2, setCount2] = useState(0);
 
   const setter = () => setCount((count) => count + 1);
-  const setter2 = () => setCount2((count2) => count2 + 1);
 
   return (
     <div class={wrapper}>
-      <button class={button}>Without Error</button>
       <button class={classes(count)} onClick={setter}>
         {count}
-      </button>
-      <button class={classes(count2)} onClick={setter2}>
-        {count2}
       </button>
     </div>
   );

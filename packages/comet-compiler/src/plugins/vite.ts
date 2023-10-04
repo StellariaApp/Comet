@@ -6,8 +6,8 @@ import {
   VIRTUAL_MODULE_ID,
 } from "../constants";
 
-import { Transform } from "../core/Transform";
-import { ResolvedConfig } from "../types/LoadConfig";
+import { transform } from "../core/Transform";
+import { ResolvedConfig } from "../types/Config";
 import { loadConfig } from "../core/Config";
 import { createFileId } from "../core/File";
 
@@ -25,22 +25,18 @@ export const Comet = (): Vite.Plugin => {
 
     resolveId(id) {
       const [filename, params] = id.split("?");
-      return filename === VIRTUAL_MODULE_ID
-        ? `${RESOLVED_VIRTUAL_MODULE_ID}?${params}`
-        : undefined;
+      if (filename !== VIRTUAL_MODULE_ID) return;
+      return `${RESOLVED_VIRTUAL_MODULE_ID}?${params}`;
     },
 
     load(id) {
       const [filename, _params] = id.split("?");
-      if (filename === RESOLVED_VIRTUAL_MODULE_ID) {
-        const params = new URLSearchParams(_params);
-        return params.get(CSS_PARAM_NAME) ?? "";
-      } else {
-        return;
-      }
+      if (filename !== RESOLVED_VIRTUAL_MODULE_ID) return;
+      const params = new URLSearchParams(_params);
+      return params.get(CSS_PARAM_NAME) ?? "";
     },
 
-    transform(source, id, options) {
+    transform(source, id) {
       const [filename] = id.split("?");
 
       if (!filename) return;
@@ -53,7 +49,8 @@ export const Comet = (): Vite.Plugin => {
         packageName: config.packageName,
       });
 
-      const { code, css } = Transform(source, {
+      const { code, css } = transform(source, {
+        ...config,
         fileId,
         filename,
       });
