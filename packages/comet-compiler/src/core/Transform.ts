@@ -16,68 +16,73 @@ export type TransformOptions = Config & {
   fileId?: string;
 };
 
-export const transform = (source: string, config: TransformOptions) => {
+export const transform = (code: string, config: TransformOptions) => {
   const { fileId } = config ?? {};
 
-  var code = source;
+  var css = "";
 
-  const notMatched = { code, css: "", map: "", vars: "" };
+  const notMatched = { code, css: "" };
   const hasImport = code.match(ImportRegex);
+
   if (!hasImport) return notMatched;
 
-  const functions = hasImport?.[1].split(",").map((i) => i.trim());
+  const functions = hasImport?.[1]?.split(",").map((i) => i.trim());
 
   const isUsedVars = functions?.includes("variables");
+  const isUsedCSS = functions?.includes("css");
+
   if (isUsedVars) {
     code = getVars(code, fileId);
   }
 
-  const stylesRaw = code.match(new RegExp(CSSConstRegex, "g"));
-  const stylesObjectRaw = code.match(new RegExp(CSSObjectRegex, "g"));
+  if (isUsedCSS) {
+    const stylesRaw = code.match(new RegExp(CSSConstRegex, "g"));
 
-  stylesRaw?.forEach((style) => {
-    const {
-      var: varType,
-      name,
-      css,
-    } = style.match(CSSConstRegex)?.groups ?? {};
-    const hash = generateHash(css + fileId + name + varType);
-    code = code.replace(style, `${varType} ${name} = "${hash}"`);
-    StyleSheet.set(`${fileId}:${name}:${varType}`, {
-      var: varType,
-      name,
-      css,
-      hash,
+    const stylesObjectRaw = code.match(new RegExp(CSSObjectRegex, "g"));
+
+    stylesRaw?.forEach((style) => {
+      const {
+        var: varType,
+        name,
+        css,
+      } = style.match(CSSConstRegex)?.groups ?? {};
+      const hash = generateHash(css + fileId + name + varType);
+      code = code.replace(style, `${varType} ${name} = "${hash}"`);
+      StyleSheet.set(`${fileId}:${name}:${varType}`, {
+        var: varType,
+        name,
+        css,
+        hash,
+      });
     });
-  });
 
-  stylesObjectRaw?.forEach((style) => {
-    const { name, css } = style.match(CSSObjectRegex)?.groups ?? {};
-    const hash = generateHash(css + fileId + name + "object");
-    code = code.replace(style, `${name}: "${hash}"`);
-    StyleSheet.set(`${fileId}:${name}:object`, {
-      var: "object",
-      name,
-      css,
-      hash,
+    stylesObjectRaw?.forEach((style) => {
+      const { name, css } = style.match(CSSObjectRegex)?.groups ?? {};
+      const hash = generateHash(css + fileId + name + "object");
+      code = code.replace(style, `${name}: "${hash}"`);
+      StyleSheet.set(`${fileId}:${name}:object`, {
+        var: "object",
+        name,
+        css,
+        hash,
+      });
     });
-  });
 
-  const vars = Array.from(Variables.values())
-    .map(({ key, value }) => `${key}:${value};`)
-    .join("\n");
+    const vars = Array.from(Variables.values())
+      .map(({ key, value }) => `${key}:${value};`)
+      .join("\n");
 
-  const rootVars = `:root{\n${vars}\n}`;
+    const rootVars = `:root{\n${vars}\n}`;
 
-  const css = Array.from(StyleSheet.values())
-    .map(({ hash, css }) => `.${hash}{${css}}`)
-    .join("\n");
+    css = Array.from(StyleSheet.values())
+      .map(({ hash, css }) => `.${hash}{${css}}`)
+      .join("\n");
 
-  const cssWithRoot = `${rootVars}\n${css}`;
+    css = `${rootVars}\n${css}`;
+  }
 
   return {
-    code: code,
-    css: cssWithRoot,
-    vars: "",
+    code,
+    css,
   };
 };

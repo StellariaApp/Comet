@@ -24,7 +24,7 @@ export const getVars = (code: string, fileId?: string) => {
       '"$2":'
     );
 
-    const jsonParsed = JSON.parse(objectFormat);
+    let jsonParsed = eval(`(${objectFormat})`);
 
     const nameVarHash = generateHash(`${fileId}-${nameVar}`);
 
@@ -43,7 +43,6 @@ export const getVars = (code: string, fileId?: string) => {
       const keyName = key.replace(nameVarHash, nameVar);
       const keyNameNullish = keyName.replace(/\./g, "(\\?.\\?|\\?.|\\.|)");
       const regex = new RegExp(`\\$\\{${keyNameNullish}\\}`, "g");
-      const match = code.match(regex);
       code = code.replace(regex, `var(${variable})`);
     });
   });

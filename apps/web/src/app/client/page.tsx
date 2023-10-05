@@ -1,4 +1,5 @@
-import { useState } from "preact/hooks";
+"use client";
+import { useState } from "react";
 
 import { css, cv, variables } from "@stellaria/comet";
 
@@ -86,7 +87,7 @@ const content = css`
   align-items: center;
 `;
 
-export function App() {
+const App = () => {
   const [count, setCount] = useState(0);
 
   const add = () => setCount((count) => count + 1);
@@ -95,21 +96,23 @@ export function App() {
   const clasess = variantsButton(count);
 
   return (
-    <div class={wrapper}>
-      <div class={content}>
-        <button class={clasess} onClick={remove}>
+    <div className={wrapper}>
+      <div className={content}>
+        <button className={clasess} onClick={remove}>
           -
         </button>
-        <button class={clasess} onClick={reset}>
+        <button className={clasess} onClick={reset}>
           {count}
         </button>
-        <button class={clasess} onClick={add}>
+        <button className={clasess} onClick={add}>
           +
         </button>
       </div>
-      <button class={clasess} onClick={reset}>
+      <button className={clasess} onClick={reset}>
         Reset
       </button>
     </div>
   );
-}
+};
+
+export default App;

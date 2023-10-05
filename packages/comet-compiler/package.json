@@ -15,19 +15,42 @@
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./assets/*": "./src/assets/*",
+    "./webpack/loader": {
+      "types": "./dist/plugins/webpack/loader.d.ts",
+      "import": "./dist/plugins/webpack/loader.mjs",
+      "require": "./dist/plugins/webpack/loader.js"
+    },
+    "./webpack/cssLoader": {
+      "types": "./dist/plugins/webpack/cssLoader.d.ts",
+      "import": "./dist/plugins/webpack/cssLoader.mjs",
+      "require": "./dist/plugins/webpack/cssLoader.js"
+    },
+    "./webpack/plugin": {
+      "types": "./dist/plugins/webpack/plugin.d.ts",
+      "import": "./dist/plugins/webpack/plugin.mjs",
+      "require": "./dist/plugins/webpack/plugin.js"
+    }
+  },
   "sideEffects": false,
   "license": "MIT",
   "files": [
-    "dist/**"
+    "dist/**",
+    "assets/**"
   ],
   "scripts": {
-    "build": "tsup src/index.ts --format esm,cjs --dts",
-    "dev": "tsup src/index.ts --format esm,cjs --watch --dts",
+    "build": "tsup",
+    "dev": "tsup --watch",
     "lint": "eslint \"src/**/*.ts*\"",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "dependencies": {
-    "@stellaria/comet-compiler-rust": "*",
     "esbuild": "^0.19.2"
   },
   "devDependencies": {

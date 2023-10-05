@@ -1,5 +1,5 @@
-import { Comet as CometPluginVite } from "@stellaria/comet-compiler";
+import { PluginVite } from "@stellaria/comet-compiler";
 
-export const Comet = CometPluginVite;
+export const Comet = PluginVite;
 
-export default CometPluginVite;
+export default PluginVite;

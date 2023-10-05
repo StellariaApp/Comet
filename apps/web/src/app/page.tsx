@@ -1,56 +1,73 @@
-import { css } from "@stellaria/comet";
+import { css, variables } from "@stellaria/comet";
+
+const vars = variables({
+  button: {
+    base: {
+      background: "#0072f5",
+      hoverBackground: "#0062d5",
+      border: "#0062d5",
+      text: "#ffffff",
+      boxShadow: "0 0 0.5rem rgba(0, 0, 0, 0.1)",
+    },
+    success: {
+      background: "#00d1b2",
+      hoverBackground: "#00c4a7",
+      border: "#00c4a7",
+      text: "#ffffff",
+    },
+    error: {
+      background: "#e71f33",
+      hoverBackground: "#d61d30",
+      border: "#a51220",
+      text: "#ffffff",
+    },
+  },
+});
 
 const wrapper = css`
+  width: 100%;
+  height: 100%;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const content = css`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
 `;
 
 const button = css`
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
+  background-color: ${vars?.button?.base?.background};
+  width: max-content;
+  padding: 0.7rem 1rem;
+  border-radius: 0.32rem;
+  border: 2px solid ${vars?.button?.base?.border};
+  color: ${vars?.button?.base?.text};
+  box-shadow: ${vars?.button?.base?.boxShadow};
+  &:hover {
+    background-color: ${vars?.button?.base?.hoverBackground};
+    transform: scale(1.12);
+  }
+  &:active {
+    transform: scale(0.98);
+  }
+
+  transition: all 0.2s ease-in-out;
 `;
 
-const styles = css`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 130px;
-  width: 200px;
-  background-color: red;
-  color: white;
-`;
-
-const styles2 = css`
-  background-color: blue;
-  color: white;
-`;
-
-const styles3 = css`
-  background-color: green;
-  color: white;
-`;
-
-function App() {
+const App = () => {
   return (
     <div className={wrapper}>
-      <span>class hash is {button}</span>
-      <button className={[button, styles].join(" ")}>Button Styles</button>
-      <span>class hash is {styles}</span>
-      <button className={[button, styles2].join(" ")}>Button Styles 2</button>
-      <span>class hash is {styles2}</span>
-      <button className={[button, styles3].join(" ")}>Button Styles 3</button>
-      <span>class hash is {styles3}</span>
+      <div className={content}>
+        <button className={button}>Server Side Button hash:{button}</button>
+      </div>
     </div>
   );
-}
+};
 
 export default App;

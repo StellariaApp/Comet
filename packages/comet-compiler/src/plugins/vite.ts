@@ -11,7 +11,7 @@ import { ResolvedConfig } from "../types/Config";
 import { loadConfig } from "../core/Config";
 import { createFileId } from "../core/File";
 
-export const Comet = (): Vite.Plugin => {
+export const PluginVite = (): Vite.Plugin => {
   let config = {} as ResolvedConfig;
   return {
     name: "Comet Vite Plugin",

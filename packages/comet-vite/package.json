@@ -28,8 +28,7 @@
   },
   "dependencies": {
     "@stellaria/comet": "*",
-    "@stellaria/comet-compiler": "*",
-    "@stellaria/comet-compiler-rust": "*"
+    "@stellaria/comet-compiler": "*"
   },
   "devDependencies": {
     "typescript-config-stellaria-comet": "*",
