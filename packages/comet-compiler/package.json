@@ -42,7 +42,7 @@
   "license": "MIT",
   "files": [
     "dist/**",
-    "assets/**"
+    "src/assets/**"
   ],
   "scripts": {
     "build": "tsup",
