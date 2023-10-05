@@ -1,5 +1,14 @@
 # @stellaria/comet-vite
 
+## 0.0.10
+
+### Patch Changes
+
+- ec44593: 0.0.10
+- Updated dependencies [ec44593]
+  - @stellaria/comet@0.0.10
+  - @stellaria/comet-compiler@0.0.10
+
 ## 0.0.9
 
 ### Patch Changes
