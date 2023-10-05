@@ -17,6 +17,7 @@
     "eslint-config-stellaria-comet": "*",
     "prettier": "^2.5.1",
     "rimraf": "^5.0.1",
+    "copyfiles": "^2.4.1",
     "tsx": "^3.12.7",
     "turbo": "latest"
   },
