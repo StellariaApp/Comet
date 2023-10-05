@@ -4,9 +4,7 @@ import { ResolvedConfig } from "../../types/Config.js";
 
 declare const require: NodeRequire;
 
-export const CSS_PATH = require.resolve(
-  "@stellaria/comet-compiler/assets/comet.css"
-);
+export const CSS_PATH = require.resolve("@stellaria/comet/assets/comet.css");
 
 export default class Plugin {
   _config: ResolvedConfig | undefined;
@@ -49,7 +47,7 @@ export default class Plugin {
         exclude: /(node_modules|dist)/,
         use: [
           {
-            loader: "@stellaria/comet-compiler/webpack/loader",
+            loader: "@stellaria/comet/webpack/loader",
             options: {
               config: this.config.bind(this),
             },
@@ -60,7 +58,7 @@ export default class Plugin {
         test: CSS_PATH,
         use: [
           {
-            loader: "@stellaria/comet-compiler/webpack/cssLoader",
+            loader: "@stellaria/comet/webpack/cssLoader",
             options: {
               config: this.config.bind(this),
             },

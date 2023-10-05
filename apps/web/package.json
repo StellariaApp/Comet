@@ -13,8 +13,7 @@
     "next": "^13.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "@stellaria/comet": "*",
-    "@stellaria/comet-next": "*"
+    "@stellaria/comet": "*"
   },
   "devDependencies": {
     "typescript-config-stellaria-comet": "*",

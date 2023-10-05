@@ -17,3 +17,5 @@ export const PluginNext = (nextConfig: NextConfig): NextConfig => {
     },
   };
 };
+
+export default PluginNext;

@@ -12,8 +12,7 @@
   },
   "dependencies": {
     "preact": "^10.16.0",
-    "@stellaria/comet": "*",
-    "@stellaria/comet-vite": "*"
+    "@stellaria/comet": "*"
   },
   "devDependencies": {
     "@preact/preset-vite": "^2.5.0",

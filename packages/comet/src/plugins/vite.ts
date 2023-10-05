@@ -73,3 +73,5 @@ export const PluginVite = (): Vite.Plugin => {
     },
   };
 };
+
+export default PluginVite;

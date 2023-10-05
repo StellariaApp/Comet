@@ -1,4 +1,4 @@
-import { Config } from "@stellaria/comet-compiler";
+import { Config } from "./types/Config";
 
 export const css = (template: TemplateStringsArray, ...args: any[]) => {
   return "comet";

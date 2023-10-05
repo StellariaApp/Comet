@@ -1,39 +1,91 @@
 {
   "name": "@stellaria/comet",
-  "version": "0.0.4",
+  "version": "0.0.0",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
   "author": "William JCR (WillishakespeareSKR13)",
-  "description": "CSS in JS compiler for Stellaria",
+  "description": "A CSS-in-JS zero-runtime library for React",
   "repository": {
     "type": "git",
-    "url": "https://github.com/StellariaApp/Comet.git",
-    "directory": "packages/comet"
+    "url": "https://github.com/StellariaApp/Comet.git"
   },
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./assets/*": "./src/assets/*",
+    "./webpack/loader": {
+      "types": "./dist/plugins/webpack/loader.d.ts",
+      "import": "./dist/plugins/webpack/loader.mjs",
+      "require": "./dist/plugins/webpack/loader.js"
+    },
+    "./webpack/cssLoader": {
+      "types": "./dist/plugins/webpack/cssLoader.d.ts",
+      "import": "./dist/plugins/webpack/cssLoader.mjs",
+      "require": "./dist/plugins/webpack/cssLoader.js"
+    },
+    "./webpack/plugin": {
+      "types": "./dist/plugins/webpack/plugin.d.ts",
+      "import": "./dist/plugins/webpack/plugin.mjs",
+      "require": "./dist/plugins/webpack/plugin.js"
+    },
+    "./next": {
+      "types": "./dist/plugins/next.d.ts",
+      "import": "./dist/plugins/next.mjs",
+      "require": "./dist/plugins/next.js"
+    },
+    "./vite": {
+      "types": "./dist/plugins/vite.d.ts",
+      "import": "./dist/plugins/vite.mjs",
+      "require": "./dist/plugins/vite.js"
+    }
+  },
   "sideEffects": false,
   "license": "MIT",
   "files": [
-    "dist/**"
+    "dist/**",
+    "assets/**"
   ],
   "scripts": {
-    "build": "tsup src/index.ts --format esm,cjs --dts",
-    "dev": "tsup src/index.ts --format esm,cjs --watch --dts",
+    "build": "tsup",
+    "dev": "tsup --watch",
     "lint": "eslint \"src/**/*.ts*\"",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
+  },
+  "dependencies": {
+    "esbuild": "^0.19.2",
+    "next": "^13.4.19",
+    "vite": "^4.4.4",
+    "webpack": "^5.88.1"
   },
   "devDependencies": {
     "typescript-config-stellaria-comet": "*",
     "eslint": "^7.32.0",
     "eslint-config-stellaria-comet": "*",
-    "@types/react": "^18.2.0",
-    "@types/react-dom": "^18.2.0",
-    "react": "^17.0.2",
     "tsup": "^5.10.1",
     "typescript": "^5.1.6"
+  },
+  "peerDependencies": {
+    "next": "^13",
+    "vite": "^4",
+    "webpack": "^5"
+  },
+  "peerDependenciesMeta": {
+    "next": {
+      "optional": true
+    },
+    "vite": {
+      "optional": true
+    },
+    "webpack": {
+      "optional": true
+    }
   }
 }
