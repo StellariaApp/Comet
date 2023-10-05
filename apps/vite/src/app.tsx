@@ -29,7 +29,7 @@ const vars = variables({
 const variants = cv({
   base: css`
     background-color: ${vars?.button?.base?.background};
-    width: max-content;
+    width: 200px;
     padding: 0.7rem 1rem;
     border-radius: 0.32rem;
     border: 2px solid ${vars?.button?.base?.border};

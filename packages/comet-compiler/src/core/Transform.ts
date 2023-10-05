@@ -46,7 +46,7 @@ export const transform = (code: string, config: TransformOptions) => {
         name,
         css,
       } = style.match(CSSConstRegex)?.groups ?? {};
-      const hash = generateHash(css + fileId + name + varType);
+      const hash = generateHash(fileId + name + varType);
       code = code.replace(style, `${varType} ${name} = "${hash}"`);
       StyleSheet.set(`${fileId}:${name}:${varType}`, {
         var: varType,
@@ -58,7 +58,7 @@ export const transform = (code: string, config: TransformOptions) => {
 
     stylesObjectRaw?.forEach((style) => {
       const { name, css } = style.match(CSSObjectRegex)?.groups ?? {};
-      const hash = generateHash(css + fileId + name + "object");
+      const hash = generateHash(fileId + name + "object");
       code = code.replace(style, `${name}: "${hash}"`);
       StyleSheet.set(`${fileId}:${name}:object`, {
         var: "object",

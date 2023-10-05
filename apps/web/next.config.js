@@ -1,4 +1,4 @@
-const withComet = require('@stellaria/comet-compiler')
+const withComet = require('@stellaria/comet-next')
 
 
 module.exports = withComet.PluginNext({
