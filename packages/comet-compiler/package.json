@@ -46,8 +46,8 @@
     "dist/assets/comet.css"
   ],
   "scripts": {
-    "build": "tsup && npm run copy",
-    "dev": "tsup --watch",
+    "build": "tsup --clean && npm run copy",
+    "dev": "npm run copy && tsup --watch",
     "lint": "eslint \"src/**/*.ts*\"",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
     "copy": "copyfiles -f ./src/assets/**/* ./dist/assets"
