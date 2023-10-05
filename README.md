@@ -51,10 +51,10 @@ To start using Comet in your project, follow these steps:
 
   ```javascript
   import { defineConfig } from "vite";
-  import { Comet } from "@stellaria/comet-vite";
+  import { PluginVite } from "@stellaria/comet-vite";
 
   export default defineConfig({
-    plugins: [Comet()],
+    plugins: [PluginVite()],
   });
   ```
 
