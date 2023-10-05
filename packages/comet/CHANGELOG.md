@@ -1,5 +1,11 @@
 # @stellaria/comet
 
+## 0.0.9
+
+### Patch Changes
+
+- c71e892: 0.0.9
+
 ## 0.0.8
 
 ### Patch Changes
