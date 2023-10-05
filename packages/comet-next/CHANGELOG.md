@@ -1,13 +1,13 @@
 # @stellaria/comet-next
 
-## 0.0.1
+## 0.0.4
 
 ### Patch Changes
 
 - 9fd8e02: 0.0.0
 - Updated dependencies [9fd8e02]
-  - @stellaria/comet@0.0.1
-  - @stellaria/comet-compiler@0.0.1
+  - @stellaria/comet@0.0.4
+  - @stellaria/comet-compiler@0.0.4
 
 ## 0.0.4
 
@@ -27,7 +27,7 @@
 
 - 7871933: Patch
 
-## 0.0.1
+## 0.0.4
 
 ### Patch Changes
 
