@@ -1,5 +1,14 @@
 # @stellaria/comet-vite
 
+## 0.0.8
+
+### Patch Changes
+
+- e73e3c5: 0.0.8
+- Updated dependencies [e73e3c5]
+  - @stellaria/comet@0.0.8
+  - @stellaria/comet-compiler@0.0.8
+
 ## 0.0.7
 
 ### Patch Changes
