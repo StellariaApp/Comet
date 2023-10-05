@@ -9,7 +9,6 @@ export default defineConfig({
     "plugins/vite": "src/plugins/vite.ts",
     "plugins/next": "src/plugins/next.ts",
   },
-  onSuccess: "npm run copy",
   format: ["cjs", "esm"],
   dts: true,
   clean: true,
