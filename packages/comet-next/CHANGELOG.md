@@ -1,5 +1,14 @@
 # @stellaria/comet-next
 
+## 0.0.6
+
+### Patch Changes
+
+- ad6949f: 0.0.6
+- Updated dependencies [ad6949f]
+  - @stellaria/comet@0.0.6
+  - @stellaria/comet-compiler@0.0.6
+
 ## 0.0.5
 
 ### Patch Changes
