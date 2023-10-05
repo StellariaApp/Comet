@@ -64,7 +64,7 @@ const App = () => {
   return (
     <div className={wrapper}>
       <div className={content}>
-        <button className={button}>Server Side Button hash:{button}</button>
+        <button className={button}>Server Side Button </button>
       </div>
     </div>
   );

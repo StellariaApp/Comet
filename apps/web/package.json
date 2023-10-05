@@ -12,12 +12,11 @@
   "dependencies": {
     "next": "^13.4.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "@stellaria/comet": "*",
+    "@stellaria/comet-next": "*"
   },
   "devDependencies": {
-    "@stellaria/comet": "*",
-    "@stellaria/comet-next": "*",
-    "@stellaria/comet-compiler": "*",
     "typescript-config-stellaria-comet": "*",
     "@types/node": "^17.0.12",
     "@types/react": "^18.0.22",
