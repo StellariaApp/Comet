@@ -1,5 +1,5 @@
 import { PluginVite } from "@stellaria/comet-compiler";
 
-export { PluginVite };
+export const Comet = PluginVite;
 
 export default PluginVite;
