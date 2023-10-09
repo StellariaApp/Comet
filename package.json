@@ -4,7 +4,7 @@
     "build": "turbo build",
     "dev": "turbo dev --no-cache --continue --concurrency 11",
     "lint": "turbo lint",
-    "clean": "turbo clean && rm -rf node_modules",
+    "clean": "turbo clean && rimraf -rf node_modules",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "changeset": "changeset",
     "version": "changeset version",

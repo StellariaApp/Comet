@@ -41,7 +41,7 @@
     "build": "tsup src/index.ts src/plugins/next/index.ts src/plugins/vite/index.ts --format esm,cjs --dts",
     "dev": "tsup src/index.ts --format esm,cjs --watch --dts",
     "lint": "eslint \"src/**/*.ts*\"",
-    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
+    "clean": "rimraf -rf .turbo && rimraf -rf node_modules && rimraf -rf dist"
   },
   "dependencies": {
     "@stellaria/comet-compiler": "*"

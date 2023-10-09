@@ -8,7 +8,7 @@
     "start": "vite preview",
     "dev": "vite",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx .",
-    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
+    "clean": "rimraf -rf .turbo && rimraf -rf node_modules && rimraf -rf dist"
   },
   "dependencies": {
     "preact": "^10.16.0",

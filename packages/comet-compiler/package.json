@@ -49,7 +49,7 @@
     "build": "tsup --clean && npm run copy",
     "dev": "npm run copy && tsup --watch",
     "lint": "eslint \"src/**/*.ts*\"",
-    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
+    "clean": "rimraf -rf .turbo && rimraf -rf node_modules && rimraf -rf dist",
     "copy": "copyfiles -f ./src/assets/**/* ./dist/assets"
   },
   "dependencies": {
