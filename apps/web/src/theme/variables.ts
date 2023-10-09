@@ -2,6 +2,9 @@ import { variables } from "@stellaria/comet";
 
 export const vars = variables({
   button: {
+    all: {
+      borderRadius: "0.25rem",
+    },
     base: {
       background: "#0072f5",
       hoverBackground: "#0062d5",

@@ -94,7 +94,6 @@ const App = () => {
   const remove = () => setCount((count) => count - 1);
   const reset = () => setCount(0);
   const clasess = variantsButton(count);
-  console.log(clasess);
 
   return (
     <div className={wrapper}>

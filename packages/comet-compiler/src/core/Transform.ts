@@ -18,7 +18,6 @@ export type TransformOptions = Config & {
 
 export const transform = (code: string, config: TransformOptions) => {
   const { fileId } = config ?? {};
-
   var css = "";
 
   const notMatched = { code, css: "" };
