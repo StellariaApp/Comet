@@ -25,11 +25,6 @@ export const transform = (code: string, config: TransformOptions) => {
 
   if (!hasImport) return notMatched;
 
-  // const functions = hasImport?.[1]?.split(",").map((i) => i.trim());
-
-  // const isUsedVars = functions?.includes("variables");
-  // const isUsedCSS = functions?.includes("css");
-
   code = getVars(code, fileId);
 
   const stylesRaw = code.match(new RegExp(CSSConstRegex, "g"));
