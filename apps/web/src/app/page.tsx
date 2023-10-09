@@ -1,4 +1,4 @@
-import { css, variables } from "@stellaria/comet";
+import { css } from "@stellaria/comet";
 import AtomButton from "../components/atoms/AtomButton";
 
 const wrapper = css`

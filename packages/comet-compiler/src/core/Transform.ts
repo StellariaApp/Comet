@@ -26,60 +26,56 @@ export const transform = (code: string, config: TransformOptions) => {
 
   if (!hasImport) return notMatched;
 
-  const functions = hasImport?.[1]?.split(",").map((i) => i.trim());
+  // const functions = hasImport?.[1]?.split(",").map((i) => i.trim());
 
-  const isUsedVars = functions?.includes("variables");
-  const isUsedCSS = functions?.includes("css");
+  // const isUsedVars = functions?.includes("variables");
+  // const isUsedCSS = functions?.includes("css");
 
-  if (isUsedVars) {
-    code = getVars(code, fileId);
-  }
+  code = getVars(code, fileId);
 
-  if (isUsedCSS) {
-    const stylesRaw = code.match(new RegExp(CSSConstRegex, "g"));
+  const stylesRaw = code.match(new RegExp(CSSConstRegex, "g"));
 
-    const stylesObjectRaw = code.match(new RegExp(CSSObjectRegex, "g"));
+  const stylesObjectRaw = code.match(new RegExp(CSSObjectRegex, "g"));
 
-    stylesRaw?.forEach((style) => {
-      const {
-        var: varType,
-        name,
-        css,
-      } = style.match(CSSConstRegex)?.groups ?? {};
-      const hash = generateHash(fileId + name + varType);
-      code = code.replace(style, `${varType} ${name} = "${hash}"`);
-      StyleSheet.set(hash, {
-        var: varType,
-        name,
-        css,
-        hash,
-      });
+  stylesRaw?.forEach((style) => {
+    const {
+      var: varType,
+      name,
+      css,
+    } = style.match(CSSConstRegex)?.groups ?? {};
+    const hash = generateHash(fileId + name + varType);
+    code = code.replace(style, `${varType} ${name} = "${hash}"`);
+    StyleSheet.set(hash, {
+      var: varType,
+      name,
+      css,
+      hash,
     });
+  });
 
-    stylesObjectRaw?.forEach((style) => {
-      const { name, css } = style.match(CSSObjectRegex)?.groups ?? {};
-      const hash = generateHash(fileId + name + "object");
-      code = code.replace(style, `${name}: "${hash}"`);
-      StyleSheet.set(hash, {
-        var: "object",
-        name,
-        css,
-        hash,
-      });
+  stylesObjectRaw?.forEach((style) => {
+    const { name, css } = style.match(CSSObjectRegex)?.groups ?? {};
+    const hash = generateHash(fileId + name + "object");
+    code = code.replace(style, `${name}: "${hash}"`);
+    StyleSheet.set(hash, {
+      var: "object",
+      name,
+      css,
+      hash,
     });
+  });
 
-    const vars = Array.from(Variables.values())
-      .map(({ key, value }) => `${key}:${value};`)
-      .join("\n");
+  const vars = Array.from(Variables.values())
+    .map(({ key, value }) => `${key}:${value};`)
+    .join("\n");
 
-    const rootVars = `:root{\n${vars}\n}`;
+  const rootVars = `:root{\n${vars}\n}`;
 
-    css = Array.from(StyleSheet.values())
-      .map(({ hash, css }) => `.${hash}{${css}}`)
-      .join("\n");
+  css = Array.from(StyleSheet.values())
+    .map(({ hash, css }) => `.${hash}{${css}}`)
+    .join("\n");
 
-    css = `${rootVars}\n${css}`;
-  }
+  css = `${rootVars}\n${css}`;
 
   return {
     code,

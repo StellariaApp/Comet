@@ -1,21 +1,27 @@
 import { css } from "@stellaria/comet";
+import { vars } from "../../theme/variables";
 
-const buttonStyles = css`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100px;
-  width: 300px;
-  background-color: blue;
-  color: white;
-  font-size: 20px;
-  font-weight: bold;
+const button = css`
+  background-color: ${vars?.button?.base?.background};
+  width: max-content;
+  padding: 0.7rem 1rem;
+  border-radius: 0.32rem;
+  border: 2px solid ${vars?.button?.base?.border};
+  color: ${vars?.button?.base?.text};
+  box-shadow: ${vars?.button?.base?.boxShadow};
+  &:hover {
+    background-color: ${vars?.button?.base?.hoverBackground};
+    transform: scale(1.12);
+  }
+  &:active {
+    transform: scale(0.98);
+  }
+
+  transition: all 0.2s ease-in-out;
 `;
 
 const AtomButton = () => {
-  return (
-    <button className={buttonStyles}>AtomButton Hash is {buttonStyles}</button>
-  );
+  return <button className={button}>Server Side Button </button>;
 };
 
 export default AtomButton;
