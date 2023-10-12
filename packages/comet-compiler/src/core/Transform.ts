@@ -1,4 +1,4 @@
-import { Config } from "../types/Config";
+import { Config } from "./Config";
 import { generateHash } from "./Hash";
 import { StyleSheet, Variables } from "./Map";
 import { getVars } from "./Vars";

@@ -1,4 +1,4 @@
-export type * from "./types/Config";
+export type * from "./core/Config";
 export type * from "./types/Keys";
 export { PluginVite } from "../src/plugins/vite";
 export { PluginNext } from "../src/plugins/next";

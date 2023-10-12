@@ -2,17 +2,33 @@ import fs from "node:fs";
 import path from "node:path";
 import url from "node:url";
 import * as esbuild from "esbuild";
-import type { Config } from "../types/Config";
 import { CONFIG_FILES, DEFAULT_EXCLUDE, DEFAULT_INCLUDE } from "../constants";
-import { createFilter } from "./Filter";
+import { FilterFn, Pattern, createFilter } from "./Filter";
 
 import { IsESM } from "./ESM";
 import { getPackageJson } from "./Package";
 import { getFileName } from "./File";
 import { dynamicImport } from "./Import";
 
+export type Config = {
+  include?: Pattern;
+  exclude?: Pattern;
+};
+
+export type ResolvedConfig = {
+  root: string;
+  packageName: string;
+  filter: FilterFn;
+  config?: Config;
+  dependencies: string[];
+};
+
+type ConfigWithPackageName = Config & {
+  packageName?: string;
+};
+
 export const loadConfig = async (root: string) => {
-  let config = {} as Config;
+  let config = {} as ConfigWithPackageName;
   const filename = getFileName(root, CONFIG_FILES);
 
   let dependencies: string[] = [];
@@ -66,10 +82,10 @@ export const loadConfig = async (root: string) => {
     }
   }
 
-  let packageName = "unknown";
+  let packageName = config?.packageName ?? "unknown";
 
   try {
-    if (config) {
+    if (config && config.packageName === undefined) {
       const result = getPackageJson(root);
       if (result?.packageJson.name) {
         packageName = result.packageJson.name;

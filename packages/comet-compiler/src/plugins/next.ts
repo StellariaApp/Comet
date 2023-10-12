@@ -1,12 +1,16 @@
 import type { NextConfig } from "next";
 import type { Configuration } from "webpack";
 import WebpackPlugin from "./webpack/plugin";
+import WebpackPluginVars from "./webpack/plugin";
 
 export const PluginNext = (nextConfig: NextConfig): NextConfig => {
   return {
     ...nextConfig,
+
     webpack(config: Configuration, options) {
+      config.plugins?.push(new WebpackPluginVars());
       config.plugins?.push(new WebpackPlugin());
+
       config.infrastructureLogging = { level: "error" };
 
       if (typeof nextConfig.webpack === "function") {

@@ -1,5 +1,5 @@
 import { css } from "@stellaria/comet";
-import { vars } from "../../../theme/variables";
+import { vars } from "../../../theme/vars";
 
 const button = css`
   background-color: ${vars?.button?.base?.background};
@@ -21,7 +21,7 @@ const button = css`
 `;
 
 const AtomButton = () => {
-  return <button className={button}>Server Side Button </button>;
+  return <button className={button}>Server Side Button {button}</button>;
 };
 
 export default AtomButton;

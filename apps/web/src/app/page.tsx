@@ -23,6 +23,9 @@ const App = () => {
     <div className={wrapper}>
       <div className={content}>
         <AtomButton />
+        <AtomButton />
+        <AtomButton />
+        <AtomButton />
       </div>
     </div>
   );

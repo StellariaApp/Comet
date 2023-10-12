@@ -7,8 +7,7 @@ import {
 } from "../constants";
 
 import { transform } from "../core/Transform";
-import { ResolvedConfig } from "../types/Config";
-import { loadConfig } from "../core/Config";
+import { ResolvedConfig, loadConfig } from "../core/Config";
 import { createFileId } from "../core/File";
 
 export const PluginVite = (): Vite.Plugin => {

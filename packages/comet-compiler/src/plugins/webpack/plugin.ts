@@ -1,6 +1,5 @@
 import type { Compiler } from "webpack";
-import { loadConfig } from "../../core/Config.js";
-import { ResolvedConfig } from "../../types/Config.js";
+import { ResolvedConfig, loadConfig } from "../../core/Config.js";
 
 declare const require: NodeRequire;
 

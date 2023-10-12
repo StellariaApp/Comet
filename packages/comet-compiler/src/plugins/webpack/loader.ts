@@ -2,8 +2,8 @@ import type { LoaderContext, LoaderDefinitionFunction } from "webpack";
 
 import { transform } from "../../core/Transform";
 import { createFileId } from "../../core/File";
-import { ResolvedConfig } from "../../types/Config";
 import { CSS_PATH } from "./plugin";
+import { ResolvedConfig } from "../../core/Config";
 
 type WebpackLoaderParams = Parameters<LoaderDefinitionFunction<never>>;
 export const CSS_PARAM_NAME = "css";
@@ -61,6 +61,6 @@ export default function loader(
 
     this.callback(undefined, `${code}\n${importCSS}`, map);
   } catch (error) {
-    // this.callback(error as Error);
+    console.error(error);
   }
 }
