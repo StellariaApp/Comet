@@ -7,7 +7,7 @@ import ToastWithTime from '../components/ToastWithTimer';
 const Page = () => {
   return (
     <Wrapper
-      css={() => css`
+      className={css`
         flex-direction: column;
         gap: 1rem;
         padding: 1rem;

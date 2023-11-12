@@ -23,11 +23,6 @@ const RootLayout = (props: Props) => {
 
   return (
     <html lang="en">
-      <head
-        dangerouslySetInnerHTML={{
-          __html: cache.join('')
-        }}
-      />
       <body className={inter.className}>
         <SetupComet default="light" themes={themes} />
         <StyleRegistry cache={cache}>{children}</StyleRegistry>

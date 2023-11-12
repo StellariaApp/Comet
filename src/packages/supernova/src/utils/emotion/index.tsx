@@ -1,5 +1,6 @@
 'use client';
 
+import { useServerInsertedHTML } from 'next/navigation';
 import { useEffect } from 'react';
 
 type Props = {
@@ -14,7 +15,7 @@ export const StyleRegistry = (props: Props) => {
     const stylesExtract = document.querySelectorAll(
       'style[data-emotion="css"]'
     );
-    const styles = Array.from(stylesExtract).map((style) => style.outerHTML);
+    const styles = Array.from(stylesExtract).map((style) => style.innerHTML);
     const fetchStyles = async () => {
       const res = await fetch('/api/styles', {
         method: 'POST',
@@ -28,6 +29,16 @@ export const StyleRegistry = (props: Props) => {
     };
     fetchStyles().catch(() => null);
   }, []);
+
+  useServerInsertedHTML(() => {
+    const { cache } = props;
+    return (
+      <style
+        data-emotion="css"
+        dangerouslySetInnerHTML={{ __html: cache.join('\n') }}
+      />
+    );
+  });
 
   return <>{children}</>;
 };
