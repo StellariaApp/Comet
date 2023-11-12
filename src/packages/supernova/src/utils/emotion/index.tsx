@@ -34,7 +34,7 @@ export const StyleRegistry = (props: Props) => {
     const { cache } = props;
     return (
       <style
-        data-emotion="css"
+        //  data-emotion="css"
         dangerouslySetInnerHTML={{ __html: cache.join('\n') }}
       />
     );
