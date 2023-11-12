@@ -1,5 +1,5 @@
 'use client';
-import { Button, useTheme } from '@stellaria/supernova';
+import { Button, useTheme } from '@stellaria/comet';
 
 const ToggleTheme = () => {
   const { toggle } = useTheme();

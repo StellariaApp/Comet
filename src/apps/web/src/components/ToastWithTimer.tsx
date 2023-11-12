@@ -1,4 +1,4 @@
-import { Toast } from '@stellaria/supernova';
+import { Toast } from '@stellaria/comet';
 import useTimer from '../hooks/useTimer';
 
 const ToastWithTimer = () => {

@@ -1,5 +1,5 @@
 {
-  "name": "@stellaria/supernova",
+  "name": "@stellaria/comet",
   "version": "0.0.0",
   "main": "./index.tsx",
   "types": "./index.tsx",

@@ -1,5 +1,5 @@
 'use client';
-import { Button, Wrapper, css } from '@stellaria/supernova';
+import { Button, Wrapper, css } from '@stellaria/comet';
 
 const PageDocs = () => {
   return (

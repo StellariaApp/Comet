@@ -1,7 +1,7 @@
 'use client';
 
-import type { Components, Palette, Theme } from '@stellaria/supernova';
-import { css } from '@stellaria/supernova';
+import type { Components, Palette, Theme } from '@stellaria/comet';
+import { css } from '@stellaria/comet';
 
 const components: Components = {
   button: () => css``

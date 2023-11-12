@@ -1,5 +1,5 @@
 'use client';
-import { Button, AnimatePresence } from '@stellaria/supernova';
+import { Button, AnimatePresence } from '@stellaria/comet';
 import { useState } from 'react';
 
 const ShowButton = () => {
@@ -15,7 +15,7 @@ const ShowButton = () => {
         >
           Get Started
         </Button>
-        {show ? <Button key="supernova-atom-button">Animations</Button> : null}
+        {show ? <Button key="comet-atom-button">Animations</Button> : null}
       </AnimatePresence>
     </div>
   );

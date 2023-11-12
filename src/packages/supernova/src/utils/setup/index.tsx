@@ -4,7 +4,7 @@ import { SetupThemeScript } from './scripts';
 import type { IConfig } from './theme';
 import { SetupTheme } from './theme';
 
-export const SetupSuperNova = <T extends Theme>(props: IConfig<T>) => {
+export const SetupComet = <T extends Theme>(props: IConfig<T>) => {
   const { default: def, themes, children } = props;
   return (
     <>
@@ -16,4 +16,4 @@ export const SetupSuperNova = <T extends Theme>(props: IConfig<T>) => {
   );
 };
 
-export default SetupSuperNova;
+export default SetupComet;

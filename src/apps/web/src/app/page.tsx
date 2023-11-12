@@ -1,5 +1,5 @@
 'use client';
-import { Accordion, Toast, Button, Wrapper, css } from '@stellaria/supernova';
+import { Accordion, Toast, Button, Wrapper, css } from '@stellaria/comet';
 import ShowButton from '../components/show-button';
 import ToggleTheme from '../components/ToggleTheme';
 import ToastWithTime from '../components/ToastWithTimer';
