@@ -19,13 +19,11 @@ type Props = {
 const RootLayout = (props: Props) => {
   const { children } = props;
 
-  const cache = Array.from(Styles.values());
-
   return (
     <html lang="en">
       <body className={inter.className}>
         <SetupComet default="light" themes={themes} />
-        <StyleRegistry cache={cache}>{children}</StyleRegistry>
+        <StyleRegistry cache={Styles.get('styles')}>{children}</StyleRegistry>
       </body>
     </html>
   );

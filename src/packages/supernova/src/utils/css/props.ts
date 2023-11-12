@@ -1,5 +1,5 @@
-import { css, cx } from '@emotion/css';
 import type { CSSPseudos, CSSInterpolation } from '../../types/css';
+import { css, cx } from '.';
 
 type WithProps = {
   [key: string]: CSSPseudos | string | number | undefined;

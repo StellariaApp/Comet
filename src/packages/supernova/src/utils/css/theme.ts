@@ -1,6 +1,6 @@
-import { cx } from '@emotion/css';
 import type { CSSTheme } from '../../types/css';
 import type { Palette } from '../../types/palette';
+import { cx } from '.';
 
 type WithTheme = {
   [key: string]: unknown;

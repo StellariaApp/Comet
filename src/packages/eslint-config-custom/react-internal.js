@@ -47,5 +47,6 @@ module.exports = {
     "@typescript-eslint/no-unnecessary-type-assertion": "off",
     "react/jsx-sort-props": "off",
     "@typescript-eslint/unbound-method": "off",
+    "import/no-cycle": "off",
   }
 };

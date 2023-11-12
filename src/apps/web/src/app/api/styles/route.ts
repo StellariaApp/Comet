@@ -1,14 +1,12 @@
 import { Styles } from '../../../store/styles';
 
 export type InputStyles = {
-  styles: string[];
+  styles: string;
 };
 export const POST = async (request: Request) => {
   const { styles } = (await request.json()) as InputStyles;
-  styles.forEach((style) => {
-    Styles.set(style, style);
-  });
+  Styles.set('styles', styles);
   return Response.json({
-    styles: Array.from(Styles.values())
+    styles: Styles.get('styles')
   });
 };

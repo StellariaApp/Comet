@@ -1,5 +1,5 @@
-import { cx } from '@emotion/css';
 import type { CSSTheme, Palette } from '../../types';
+import { cx } from '.';
 
 type IVartsKeys<T> = {
   [key in keyof T]:

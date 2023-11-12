@@ -2,9 +2,10 @@
 
 import { useServerInsertedHTML } from 'next/navigation';
 import { useEffect } from 'react';
+import { cache as cacheCSS } from '../css';
 
 type Props = {
-  cache: string[];
+  cache?: string;
   children: React.ReactNode;
 };
 
@@ -12,10 +13,9 @@ export const StyleRegistry = (props: Props) => {
   const { children } = props;
 
   useEffect(() => {
-    const stylesExtract = document.querySelectorAll(
-      'style[data-emotion="css"]'
-    );
-    const styles = Array.from(stylesExtract).map((style) => style.innerHTML);
+    const tags = cacheCSS.sheet.tags;
+    const styles = tags.map((tag) => tag.innerHTML).join('\n');
+
     const fetchStyles = async () => {
       const res = await fetch('/api/styles', {
         method: 'POST',
@@ -32,10 +32,13 @@ export const StyleRegistry = (props: Props) => {
 
   useServerInsertedHTML(() => {
     const { cache } = props;
+    if (!cache) return null;
     return (
       <style
-        //  data-emotion="css"
-        dangerouslySetInnerHTML={{ __html: cache.join('\n') }}
+        data-emotion="comet-cache"
+        dangerouslySetInnerHTML={{
+          __html: cache
+        }}
       />
     );
   });
