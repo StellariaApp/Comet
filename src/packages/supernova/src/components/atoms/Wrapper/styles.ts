@@ -1,5 +1,5 @@
 import { useTheme } from '../../../hooks/useTheme';
-import { cssProps, cx } from '../../../utils/css';
+import { cssProps } from '../../../utils/css';
 import { StylesWrapper } from './css';
 import type { WrapperProps } from './types';
 
@@ -11,7 +11,7 @@ export const Styles = (props: WrapperProps) => {
   const cssWithProps = cssProps(props);
   const cssWithTheme = cssTheme(props, 'button');
 
-  const classes = cx([styles, cssWithProps, className, cssWithTheme]);
+  const classes = [styles, cssWithProps, className, cssWithTheme].join(' ');
 
   return {
     classes

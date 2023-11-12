@@ -3,6 +3,7 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import themes from '../themes';
+import { Styles } from './api/styles/route';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -15,14 +16,21 @@ type Props = {
   children: React.ReactNode;
 };
 
+const cache = Array.from(Styles.values());
+
 const RootLayout = (props: Props) => {
   const { children } = props;
 
   return (
     <html lang="en">
+      <head
+        dangerouslySetInnerHTML={{
+          __html: cache.join('')
+        }}
+      />
       <body className={inter.className}>
         <SetupComet default="light" themes={themes} />
-        <StyleRegistry>{children}</StyleRegistry>
+        <StyleRegistry cache={cache}>{children}</StyleRegistry>
       </body>
     </html>
   );

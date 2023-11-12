@@ -4,7 +4,9 @@ import type { Components, Palette, Theme } from '@stellaria/comet';
 import { css } from '@stellaria/comet';
 
 const components: Components = {
-  button: () => css``
+  button: () => css`
+    transition: all 0.2s ease-in-out;
+  `
 };
 
 const sizes = {

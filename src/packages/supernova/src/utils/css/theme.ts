@@ -18,5 +18,5 @@ export const cssTheme = (
 
   const cssPropsComponent = theme.components?.[key ?? '']?.(theme, props);
   const cssProps = props?.css?.(theme, props);
-  return cx([cssPropsComponent, cssProps]);
+  return [cssPropsComponent, cssProps].join(' ');
 };
