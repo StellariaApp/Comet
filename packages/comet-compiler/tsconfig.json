@@ -1,5 +1,0 @@
-{
-  "extends": "typescript-config-stellaria-comet/node14.json",
-  "include": [".", "./src/assets/**/*"],
-  "exclude": ["dist", "build", "node_modules"]
-}

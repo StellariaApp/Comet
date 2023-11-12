@@ -1,115 +1,63 @@
-# Comet - Zero Runtime CSS-in-JS Library
+# Supernova - UI Library
 
-![Comet Logo](https://storage.googleapis.com/stackly-assets/stellaria/comet/comet-banner.png)
+![Nebula Banner](https://storage.googleapis.com/stackly-assets/stellaria/supernova/banner.png)
 
-**Comet** is a lightweight CSS-in-JS library designed for creating stylish and performant components with zero runtime overhead. It's the secret sauce behind the stunning UI components in Nebula, our UI library. With Comet, you can effortlessly generate and manage dynamic styles while keeping your application fast and efficient.
+**Supernova** is an extraordinarily innovative User Interface (UI) library designed to simplify the process of developing attractive and modern interfaces using the capabilities of **[Framer Motion](https://www.framer.com/motion)** and **[Emotion](https://emotion.sh)**. This library is intended to make it easy to create visually appealing and highly customizable web applications while minimizing runtime performance overhead.
 
 ## Features
 
-- ⚡ **Zero Runtime Overhead:** Comet generates CSS at build time, eliminating any runtime performance impact. Your application remains fast and responsive.
-- 💅 **Stylish Components:** Create visually appealing components using Comet's intuitive and expressive styling API.
-- 📦 **Lightweight:** Comet is designed to be minimal and focused. It's easy to integrate into your project without unnecessary bloat.
-- 🌐 **Universal Compatibility:** Whether you're building for the web, server, or any JavaScript environment, Comet works seamlessly.
-- 🎨 **Theme and Variants:** Customize your components with theming and variant support, making it simple to adapt to different styles and use cases.
+- 🎨 **Modern Style:** Supernova employs the design principles of Framer Motion to provide a modern and attractive look for your applications.
+- ⚡ **High Performance:** Thanks to Framer Motion's technique, Supernova ensures optimal performance by eliminating runtime overhead.
+- 🛠️ **Easy Customization:** Customize components as per your needs using CSS variables and easily understandable configuration options.
+- 📦 **Reusable Components:** Supernova includes a variety of out-of-the-box reusable components, from buttons and cards to navigation bars and forms.
+- 📱 **Default Responsive Design:** All components are designed with responsiveness in mind, ensuring a consistent user experience across a wide range of devices and screen sizes.
 
 ## Installation
 
-To start using Comet in your project, follow these steps:
+To get started with Supernova in your project, simply follow these steps:
 
-1. Install Comet using npm:
+1. Install Supernova using npm:
 
    ```bash
-   npm install @stellaria/comet
+   npm install @stellaria/supernova
    ```
 
-2. Configuration:
+## Usage
 
-- With Next.js:
-
-  Install the Comet Next.js plugin:
-
-  ```bash
-  npm install @stellaria/comet-next
-  ```
-
-  Add the plugin to your `next.config.js` file:
-
-  ```javascript
-  const withComet = require("@stellaria/comet-next");
-  module.exports = withComet({});
-  ```
-
-- With Vite:
-
-  Install the Comet Vite plugin:
-
-  ```bash
-  npm install @stellaria/comet-vite
-  ```
-
-  Add the plugin to your `vite.config.js` file:
-
-  ```javascript
-  import { defineConfig } from "vite";
-  import { PluginVite } from "@stellaria/comet-vite";
-
-  export default defineConfig({
-    plugins: [PluginVite()],
-  });
-  ```
-
-3. Start creating stylish components using Comet's styling API.
-
-## Example Usage
-
-Here's a simple example of how to use Comet to style a button component:
+Supernova provides easily usable reusable components. Here's an example of how to use the Button component:
 
 ```javascript
-import React from "react";
-import { css } from "@stellaria/comet";
+import { Button, Wrapper } from '@stellaria/supernova';
 
-const ButtonCSS = css`
-  background-color: #007bff;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-
-  :hover {
-    background-color: #0056b3;
-  }
-`;
-
-const MyComponent = () => {
+const App = () => {
   return (
-    <div>
-      <button className={ButtonCSS}>Click Me</button>
-    </div>
+    <Wrapper>
+      <Button variant="primary">Click Me</Button>
+    </Wrapper>
   );
 };
 
-export default MyComponent;
+export default App;
 ```
 
-## Documentation
-
-Explore the [Comet documentation](https://url-to-comet-docs.com) for detailed information on Comet's features, styling API, and customization options.
+Refer to the [full documentation](https://your-documentation-url.com) for more details on available components and how to customize them.
 
 ## Contribution
 
-We welcome contributions to Comet! If you'd like to contribute or report issues, please follow our guidelines in [CONTRIBUTING.md](https://github.com/your-comet-repo/CONTRIBUTING.md).
+We appreciate contributions to Supernova! If you wish to contribute, please follow our contribution guidelines in [CONTRIBUTING.md](https://github.com/stellaria/Supernova/blob/main/CONTRIBUTING.md).
 
 ## License
 
-Comet is distributed under the MIT License. See the [LICENSE](https://github.com/your-comet-repo/LICENSE) file for more information.
+Supernova is distributed under the MIT License. Check the [LICENSE](https://github.com/stellaria/Supernova/blob/main/LICENSE) file for more information.
 
 ---
 
-Comet simplifies the process of creating stylish and performant components in Nebula and beyond. Enjoy building beautiful user interfaces without sacrificing performance.
+We hope Supernova helps you create impressive interfaces with exceptional performance! If you have any questions or suggestions, feel free to open an issue on the GitHub repository.
 
-**The Comet Team**
+**The Nebula Team**
 
 <a href="https://github.com/WillishakespeareSKR13"><img src="https://avatars.githubusercontent.com/u/95162949?v=3" title="Willishakespeare" width="50" height="50"></a>
 
 Developed with ❤️ by [Stellaria](https://stellaria.app)
+
+If you have any more questions or need further assistance, feel free to ask!
