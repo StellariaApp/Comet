@@ -10,6 +10,6 @@ export const cssProps = (propsUnknown: unknown) => {
   const { interactions, children: _, css: __, ...rest } = props;
   const cssWithProps = css(rest as CSSInterpolation);
   const cssInteractions = css(interactions as CSSInterpolation);
-  const styles = [cssWithProps, cssInteractions].join(' ');
+  const styles = cx([cssWithProps, cssInteractions]);
   return styles;
 };
