@@ -1,7 +1,7 @@
 'use client';
 
 import { useServerInsertedHTML } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { cache as cacheCSS } from '../css';
 
 type Props = {
@@ -12,9 +12,12 @@ type Props = {
 export const StyleRegistry = (props: Props) => {
   const { children } = props;
 
+  const [stylesG, setStylesG] = useState<string>('');
+
   useEffect(() => {
     const tags = cacheCSS.sheet.tags;
     const styles = tags.map((tag) => tag.innerHTML).join('\n');
+    setStylesG(styles);
 
     const fetchStyles = async () => {
       const res = await fetch('/api/styles', {
@@ -43,5 +46,10 @@ export const StyleRegistry = (props: Props) => {
     );
   });
 
-  return <>{children}</>;
+  return (
+    <>
+      {children}
+      <span>{stylesG}</span>
+    </>
+  );
 };
