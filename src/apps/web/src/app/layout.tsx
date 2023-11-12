@@ -3,7 +3,7 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import themes from '../themes';
-import { Styles } from './api/styles/route';
+import { Styles } from '../store/styles';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -16,10 +16,10 @@ type Props = {
   children: React.ReactNode;
 };
 
-const cache = Array.from(Styles.values());
-
 const RootLayout = (props: Props) => {
   const { children } = props;
+
+  const cache = Array.from(Styles.values());
 
   return (
     <html lang="en">

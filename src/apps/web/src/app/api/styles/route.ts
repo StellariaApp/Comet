@@ -1,4 +1,4 @@
-export const Styles = new Map<string, string>();
+import { Styles } from '../../../store/styles';
 
 export type InputStyles = {
   styles: string[];
