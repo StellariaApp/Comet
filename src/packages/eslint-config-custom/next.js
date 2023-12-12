@@ -51,5 +51,10 @@ module.exports = {
     "react/jsx-sort-props": "off",
     "@typescript-eslint/unbound-method": "off",
     "import/no-cycle": "off",
+    "no-bitwise": "off",
+    "@typescript-eslint/no-unnecessary-condition": "off",
+    "no-constant-condition": "off",
+    "no-param-reassign": "off",
+
   }
 };
