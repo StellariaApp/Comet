@@ -52,5 +52,9 @@ module.exports = {
     "@typescript-eslint/no-unnecessary-condition": "off",
     "no-constant-condition": "off",
     "no-param-reassign": "off",
+    "camelcase": "off",
+    "@typescript-eslint/no-shadow": "off",
+    "no-useless-return": "off",
+
   }
 };

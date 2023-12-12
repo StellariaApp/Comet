@@ -1,0 +1,7 @@
+const CONFIG = {
+  API_KEY:
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQXBpIEtleSAxIiwidXNlcklkIjoiNjU3N2M2YTYxY2UyMWIzZjA3YTBiN2VmIiwiY29tcGFueUlkIjoiNjU3N2NlNjcxMmViZTFkMzhmNzJlOThjIiwiY3JlYXRlZEF0IjoiMjAyMy0xMi0xMlQwMzowODoyNy4wMTRaIiwiaWF0IjoxNzAyMzUwNTA3fQ.2PP0YmE8yVZb4f3hANqq3m1muQMZgXBGoKoMEEGm4IQ',
+  STYLE_ID: '6577cf1f12ebe1d38f72e993'
+};
+
+export default CONFIG;

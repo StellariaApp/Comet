@@ -12,7 +12,7 @@ export const {
   sheet,
   cache
 } = createEmotion({
-  key: 'comet'
+  key: 'nova'
 });
 
 export * from './cv';

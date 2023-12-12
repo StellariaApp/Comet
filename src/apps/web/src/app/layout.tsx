@@ -1,9 +1,8 @@
-import { SetupComet, StyleRegistry } from '@stellaria/comet';
+import { SetupComet } from '@stellaria/comet';
 import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import themes from '../themes';
-import { Styles } from '../store/styles';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -21,9 +20,10 @@ const RootLayout = (props: Props) => {
 
   return (
     <html lang="en">
+      {/* <NovaCache style_id={CONFIG.STYLE_ID} api_key={CONFIG.API_KEY} /> */}
       <body className={inter.className}>
         <SetupComet default="light" themes={themes} />
-        <StyleRegistry cache={Styles.get('styles')}>{children}</StyleRegistry>
+        {children}
       </body>
     </html>
   );

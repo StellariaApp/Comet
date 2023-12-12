@@ -5,12 +5,11 @@ import type { IConfig } from './theme';
 import { SetupTheme } from './theme';
 
 export const SetupComet = <T extends Theme>(props: IConfig<T>) => {
-  const { default: def, themes, children } = props;
+  const { default: def, themes } = props;
   return (
     <>
       <SetupTheme default={def} themes={themes} />
       <SetupThemeScript default={def?.toString() ?? ''} />
-      {children}
       <GlobalStyles />
     </>
   );
